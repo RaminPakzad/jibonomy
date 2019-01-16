@@ -75,7 +75,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.MyView
             public void onClick(View view) {
                 WishFragment fragment = new WishFragment();
                 Bundle args = new Bundle();
-                args.putLong(Wish.WISH_ID_LABLE, wish.getWishId());
+                args.putLong(Wish.WISH_ID_LABEL, wish.getWishId());
                 fragment.setArguments(args);
                 NavigationUtil.changeFragment(fragment, itemView);
             }

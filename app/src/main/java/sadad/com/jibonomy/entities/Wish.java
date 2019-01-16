@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @Entity(tableName = "Wish")
 public class Wish {
-    public static final String WISH_ID_LABLE="WISHID";
+    public static final String WISH_ID_LABEL = "WISHID";
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "wishId")
     private Long wishId;
@@ -25,6 +25,19 @@ public class Wish {
     private String picName;
     @ColumnInfo(name = "budget")
     private BigDecimal budget;
+
+    public Wish() {
+
+    }
+
+    @Ignore
+    public Wish(String description, String name, String picName, BigDecimal budget) {
+
+        this.description = description;
+        this.name = name;
+        this.picName = picName;
+        this.budget = budget;
+    }
 
     public Long getWishId() {
         return wishId;
@@ -63,19 +76,6 @@ public class Wish {
     }
 
     public void setBudget(BigDecimal budget) {
-        this.budget = budget;
-    }
-
-    public Wish() {
-
-    }
-
-    @Ignore
-    public Wish(String description, String name, String picName, BigDecimal budget) {
-
-        this.description = description;
-        this.name = name;
-        this.picName = picName;
         this.budget = budget;
     }
 }
