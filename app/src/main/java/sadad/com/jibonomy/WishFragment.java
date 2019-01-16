@@ -110,7 +110,7 @@ public class WishFragment extends android.support.v4.app.Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Toast.makeText(rootView.getContext(), "asdfasdf", Toast.LENGTH_SHORT).show();
+
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri returnUri = data.getData();
             try {
@@ -122,8 +122,6 @@ public class WishFragment extends android.support.v4.app.Fragment {
             if (bitmapImage != null) {
                 wishImage.setImageBitmap(bitmapImage);
             }
-
-
         }
     }
 

@@ -23,6 +23,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import sadad.com.jibonomy.fragments.TransactionFragment;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener,
         OnChartValueSelectedListener {
@@ -59,11 +61,13 @@ public class MainActivity extends AppCompatActivity
                 FragmentManager fragmentManager;
                 FragmentTransaction fragmentTransaction;
                 switch (item.getItemId()) {
-
+                    case R.id.add_transaction:
+                       toolbar.setTitle("AddTransaciton");
+                       loadFragment(new TransactionFragment());
+                        break;
                     case R.id.wish_list:
                        toolbar.setTitle("Wishes");
                        loadFragment(new WishListFragment());
-
                         break;
                     case R.id.home:
                         toolbar.setTitle("Home");

@@ -10,9 +10,10 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
+import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.entities.Wish;
 
-@Database(entities = {Wish.class}, version = 1, exportSchema = false)
+@Database(entities = {Wish.class, Transaction.class}, version = 2, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class JibonomyRoomDatabase extends RoomDatabase {
 

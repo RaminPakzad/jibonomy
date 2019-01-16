@@ -32,5 +32,10 @@
     <string name="save">ذخیره</string>
     <string name="wishDescription">توضیحات</string>
     <string name="ویرایش">edit</string>
+    <string name="amount">مبلغ</string>
+    <string name="country_prompt" />
+    <string name="transactionDescription">توضیحات</string>
+    <string name="radioExpense">هزینه</string>
+    <string name="radioIncome">درآمد</string>
 
 </resources>

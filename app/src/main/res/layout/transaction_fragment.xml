@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/radioTransactionType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioExpense"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="1"
+                android:text="@string/radioExpense" />
+
+            <RadioButton
+                android:id="@+id/radioIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:tag="2"
+                android:text="@string/radioIncome" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/amount"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:hint="@string/amount"
+            android:inputType="number"
+            android:textColor="@color/darkFont"
+            android:textColorHint="@color/lightFont" />
+
+        <TextView
+            android:id="@+id/dateOfTransaction"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:textColor="@color/darkFont"
+            android:textColorHint="@color/lightFont" />
+
+        <Spinner
+            android:id="@+id/category"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:entries="@array/categories"
+            android:prompt="@string/country_prompt" />
+
+        <EditText
+            android:id="@+id/transactionDescription"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:hint="@string/transactionDescription"
+            android:inputType="text"
+            android:textColor="@color/darkFont"
+            android:textColorHint="@color/lightFont" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveTransaction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:text="@string/save" />
+
+
+</RelativeLayout>

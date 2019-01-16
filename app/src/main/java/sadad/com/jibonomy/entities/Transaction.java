@@ -9,13 +9,13 @@ import java.util.Date;
 
 @Entity(tableName = "Transactions")
 public class Transaction {
-    private static final Byte EXPENSE = (byte) 1;
-    private static final Byte INCOME = (byte) 2;
+    public static final Byte EXPENSE = (byte) 1;
+    public static final Byte INCOME = (byte) 2;
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "transactionId")
     private Long transactionId;
     @ColumnInfo(name = "transactionDate")
-    private Date transactionDate;
+    private String transactionDate;
     @ColumnInfo(name = "description")
     private String description;
     @ColumnInfo(name = "categoryType")
@@ -34,11 +34,11 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public Date getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Date transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 

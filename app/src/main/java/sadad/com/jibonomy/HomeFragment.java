@@ -30,7 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 import sadad.com.jibonomy.biz.adapter.TransactionGlimpseAdapter;
-import sadad.com.jibonomy.biz.entity.Transaction;
+import sadad.com.jibonomy.entities.Transaction;
 
 /**
  * @author ramin pakzad (RPakzadmanesh@gmail.com) on 1/13/2019.
@@ -50,12 +50,14 @@ public class HomeFragment extends Fragment {
         transactionGlimpseList = rootView.findViewById(R.id.transactionGlimpseList);
         chart = rootView.findViewById(R.id.overallExpenseChart);
         List<Transaction> transactions = new ArrayList<>();
+/*
 
         transactions.add(new Transaction(1l, new Date(), "test", (byte) 1, new BigDecimal(12000)));
         transactions.add(new Transaction(2l, new Date(), "test", (byte) 1, new BigDecimal(1000)));
         transactions.add(new Transaction(3l, new Date(), "test", (byte) 1, new BigDecimal(5000)));
         transactions.add(new Transaction(4l, new Date(), "test", (byte) 1, new BigDecimal(2000)));
         transactions.add(new Transaction(5l, new Date(), "test", (byte) 1, new BigDecimal(78000)));
+*/
 
 
         transactionGlimpseAdapter = new TransactionGlimpseAdapter(transactions, rootView.getContext());
