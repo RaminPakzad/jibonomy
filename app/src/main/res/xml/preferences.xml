@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBoxPreference android:title="ثبت تراکنش های SMS"
+        android:defaultValue="true"
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:summary="ثبت تراکنش های دریافتی از طریق SMS"
+        android:key="smsTransactionActive" />
+    <EditTextPreference android:title="حداقل مبلغ تراکنش"
+        android:key="minSmsTransaction"
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:summary="حداقل مبلغ تراکنش sms جهت ثبت"></EditTextPreference>
+    <CheckBoxPreference android:title="فعالسازی پیام بودجه"
+        android:defaultValue="true"
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:summary="دریافت پیام هنگام عبور از محدودیت های بودجه"
+        android:key="enableBudgetNotification" />
+</PreferenceScreen>
