@@ -24,6 +24,9 @@ public class WishService {
     public void insert(Wish wish) {
         this.wishDao.insert(wish);
     }
+    public void delete(Long wishId) {
+        this.wishDao.delete(wishId);
+    }
 
     public List<Wish> getWishes() {
         return wishDao.getAll();

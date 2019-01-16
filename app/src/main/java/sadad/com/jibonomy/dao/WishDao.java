@@ -25,4 +25,6 @@ public interface WishDao {
 
     @Query("SELECT * from Wish where  wishId = :wishId  ")
     Wish get(Long wishId);
+    @Query("delete from Wish where  wishId = :wishId ")
+    void delete(Long wishId);
 }

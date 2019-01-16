@@ -8,10 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -19,7 +20,9 @@ import java.util.List;
 
 import sadad.com.jibonomy.R;
 import sadad.com.jibonomy.WishFragment;
+import sadad.com.jibonomy.WishListFragment;
 import sadad.com.jibonomy.entities.Wish;
+import sadad.com.jibonomy.services.WishService;
 import sadad.com.jibonomy.utils.ImageSaver;
 import sadad.com.jibonomy.utils.NavigationUtil;
 
@@ -29,22 +32,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.MyView
     private List<Wish> wishList;
     private BigDecimal currentSaving;
     private View itemView;
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, progressPercent;
-        public ProgressBar progressBar;
-        public RelativeLayout relativeLayout;
-        public Button editWish;
-
-        public MyViewHolder(View view) {
-            super(view);
-            title = view.findViewById(R.id.title);
-            progressBar = view.findViewById(R.id.progress_bar);
-            progressPercent = view.findViewById(R.id.progress_percent);
-            relativeLayout = view.findViewById(R.id.main_layout);
-            editWish = view.findViewById(R.id.editWish);
-        }
-    }
+    private WishService wishService;
 
     public WishListAdapter(List<Wish> wishList, BigDecimal currentSaving) {
         this.wishList = wishList;
@@ -55,6 +43,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.MyView
     public WishListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.wish_list_item, parent, false);
+        wishService = new WishService(itemView.getContext());
         return new MyViewHolder(itemView);
     }
 
@@ -91,10 +80,38 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.MyView
                 NavigationUtil.changeFragment(fragment, itemView);
             }
         });
+
+
+        holder.deleteWish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                wishService.delete(wish.getWishId());
+                Toast.makeText(itemView.getContext(), "آرزو حذف شد", Toast.LENGTH_LONG).show();
+                NavigationUtil.changeFragment(new WishListFragment(), itemView);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return wishList.size();
+    }
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView title, progressPercent;
+        public ProgressBar progressBar;
+        public RelativeLayout relativeLayout;
+        public ImageButton editWish;
+        public ImageButton deleteWish;
+
+        public MyViewHolder(View view) {
+            super(view);
+            title = view.findViewById(R.id.title);
+            progressBar = view.findViewById(R.id.progress_bar);
+            progressPercent = view.findViewById(R.id.progress_percent);
+            relativeLayout = view.findViewById(R.id.main_layout);
+            editWish = view.findViewById(R.id.editWish);
+            deleteWish = view.findViewById(R.id.delete);
+        }
     }
 }
