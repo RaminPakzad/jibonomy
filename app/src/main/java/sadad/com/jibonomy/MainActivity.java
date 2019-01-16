@@ -1,5 +1,6 @@
 package sadad.com.jibonomy;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -91,6 +92,33 @@ public class MainActivity extends AppCompatActivity
         fullName.setText(prefs.getString("firstName","") + " " + prefs.getString("lastName",""));
         email.setText(prefs.getString("email",""));
 
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                item.setChecked(true);
+                switch (item.getItemId()) {
+                    case R.id.main_nav_home:
+                        Log.d("Item Clicked","main_nav_wish_list");
+                        break;
+                    case R.id.main_nav_wish_list:
+                        Log.d("Item Clicked","main_nav_wish_list");
+                        break;
+                    case R.id.main_nav_transaction_list:
+                        Log.d("Item Clicked","main_nav_transaction_list");
+                        break;
+                    case R.id.main_nav_report:
+                        Log.d("Item Clicked","main_nav_report");
+                        break;
+                    case R.id.main_nav_setting:
+                        Log.d("Item Clicked","main_nav_setting");
+                        Intent i = new Intent(getBaseContext(), SettingFragment.class);
+                        startActivity(i);
+                        break;
+                }
+
+                return false;
+            }
+        });
 
         /*Fragment fragment = new HomeFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -148,15 +176,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
