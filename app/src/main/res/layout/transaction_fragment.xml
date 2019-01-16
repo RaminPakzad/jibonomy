@@ -59,6 +59,17 @@
             android:entries="@array/categories"
             android:prompt="@string/country_prompt" />
 
+        <TextView
+            android:id="@+id/selectCategory"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:text="@string/selectCategory"
+            android:textColor="@color/darkFont"
+            android:textColorHint="@color/lightFont" />
+
+
         <EditText
             android:id="@+id/transactionDescription"
             android:layout_width="250dp"

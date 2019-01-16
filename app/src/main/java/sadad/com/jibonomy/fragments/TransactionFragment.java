@@ -1,5 +1,6 @@
 package sadad.com.jibonomy.fragments;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,13 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import sadad.com.jibonomy.ExpandableListAdapter;
 import sadad.com.jibonomy.R;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.services.TransactionService;
@@ -25,7 +31,8 @@ import sadad.com.jibonomy.services.TransactionService;
 public class TransactionFragment extends Fragment {
     View rootView;
     EditText amount;
-    TextView dateOfTranscation;
+    TextView dateOfTransaction;
+    TextView selectCategory;
     Spinner category;
     EditText transactionDescription;
     Button saveTransaction;
@@ -40,9 +47,10 @@ public class TransactionFragment extends Fragment {
         transactionService = new TransactionService(rootView.getContext());
 
         amount = rootView.findViewById(R.id.amount);
-        dateOfTranscation = rootView.findViewById(R.id.dateOfTransaction);
+        dateOfTransaction = rootView.findViewById(R.id.dateOfTransaction);
         category = rootView.findViewById(R.id.category);
         transactionDescription = rootView.findViewById(R.id.transactionDescription);
+        selectCategory = rootView.findViewById(R.id.selectCategory);
         saveTransaction = rootView.findViewById(R.id.saveTransaction);
         radioTransactionType = rootView.findViewById(R.id.radioTransactionType);
         saveTransaction.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +64,93 @@ public class TransactionFragment extends Fragment {
                 RadioButton radio = rootView.findViewById(radioTransactionType.getCheckedRadioButtonId());
                 transaction.setTransactionType(Byte.valueOf(radio.getTag().toString()));
                 transactionService.insert(transaction);
+            }
+        });
+
+        selectCategory.setOnClickListener(new View.OnClickListener() {
+            List<String> listDataHeader;
+            HashMap<String, List<String>> listDataChild;
+            private int lastExpandedPosition = -1;
+
+            @Override
+            public void onClick(View view) {
+                final Dialog dialog = new Dialog(view.getContext());
+                dialog.setContentView(R.layout.select_category_dialog);
+                dialog.setTitle("Title...");
+
+                final ExpandableListView expListView;
+                expListView = (ExpandableListView) dialog.findViewById(R.id.lvExp);
+                expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+
+                    @Override
+                    public void onGroupExpand(int groupPosition) {
+                        if (lastExpandedPosition != -1
+                                && groupPosition != lastExpandedPosition) {
+                            expListView.collapseGroup(lastExpandedPosition);
+                        }
+                        lastExpandedPosition = groupPosition;
+                    }
+                });
+                prepareListData();
+
+                ExpandableListAdapter listAdapter = new ExpandableListAdapter(dialog.getContext(), listDataHeader, listDataChild);
+                expListView.setAdapter(listAdapter);
+
+                // set the custom dialog components - text, image and button
+                /*TextView text = (TextView) dialog.findViewById(R.id.text);
+                text.setText("Android custom dialog example!");
+                ImageView image = (ImageView) dialog.findViewById(R.id.image);
+                image.setImageResource(R.drawable.ic_launcher);
+
+                Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+                // if button is clicked, close the custom dialog
+                dialogButton.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+*/
+                dialog.show();
+            }
+
+            private void prepareListData() {
+                listDataHeader = new ArrayList<String>();
+                listDataChild = new HashMap<String, List<String>>();
+
+                // Adding child data
+                listDataHeader.add("Top 250");
+                listDataHeader.add("Now Showing");
+                listDataHeader.add("Coming Soon..");
+
+                // Adding child data
+                List<String> top250 = new ArrayList<String>();
+                top250.add("The Shawshank Redemption");
+                top250.add("The Godfather");
+                top250.add("The Godfather: Part II");
+                top250.add("Pulp Fiction");
+                top250.add("The Good, the Bad and the Ugly");
+                top250.add("The Dark Knight");
+                top250.add("12 Angry Men");
+
+                List<String> nowShowing = new ArrayList<String>();
+                nowShowing.add("The Conjuring");
+                nowShowing.add("Despicable Me 2");
+                nowShowing.add("Turbo");
+                nowShowing.add("Grown Ups 2");
+                nowShowing.add("Red 2");
+                nowShowing.add("The Wolverine");
+
+                List<String> comingSoon = new ArrayList<String>();
+                comingSoon.add("2 Guns");
+                comingSoon.add("The Smurfs 2");
+                comingSoon.add("The Spectacular Now");
+                comingSoon.add("The Canyons");
+                comingSoon.add("Europa Report");
+
+                listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
+                listDataChild.put(listDataHeader.get(1), nowShowing);
+                listDataChild.put(listDataHeader.get(2), comingSoon);
             }
         });
 

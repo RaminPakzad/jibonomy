@@ -37,5 +37,6 @@
     <string name="transactionDescription">توضیحات</string>
     <string name="radioExpense">هزینه</string>
     <string name="radioIncome">درآمد</string>
+    <string name="selectCategory">انتخاب نوع</string>
 
 </resources>
