@@ -15,7 +15,9 @@ public class Transaction {
     @ColumnInfo(name = "transactionId")
     private Long transactionId;
     @ColumnInfo(name = "transactionDate")
-    private String transactionDate;
+    private Long transactionDate;
+    @ColumnInfo(name = "transactionTime")
+    private String transactionTime;
     @ColumnInfo(name = "description")
     private String description;
     @ColumnInfo(name = "categoryType")
@@ -25,7 +27,6 @@ public class Transaction {
     @ColumnInfo(name = "amount")
     private BigDecimal amount;
 
-
     public Long getTransactionId() {
         return transactionId;
     }
@@ -34,12 +35,20 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public String getTransactionDate() {
+    public Long getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(String transactionDate) {
+    public void setTransactionDate(Long transactionDate) {
         this.transactionDate = transactionDate;
+    }
+
+    public String getTransactionTime() {
+        return transactionTime;
+    }
+
+    public void setTransactionTime(String transactionTime) {
+        this.transactionTime = transactionTime;
     }
 
     public String getDescription() {
