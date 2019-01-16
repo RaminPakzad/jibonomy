@@ -1,9 +1,36 @@
 <resources>
-    <string name="app_name">Jibonomy</string>
+    <string name="app_name">wally</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_wish_list">WishListActivity</string>
+
+
+    <string name="firstMonth">فروردین</string>
+    <string name="wish_list">لیست آرزوها</string>
+    <string name="transaction_list">لیست تراکنش ها</string>
+    <string name="add_transaction">تراکنش</string>
+    <string name="dashboard">گزارشات</string>
+    <string name="report">گزارشات</string>
+    <string name="home">خانه</string>
+    <string name="setting">تنظیمات</string>
+    <string-array name="months">
+        <item>فروردین</item>
+        <item>اردیبهشت</item>
+        <item>خرداد</item>
+    </string-array>
+    <string name="appwidget_text">جیبونومی</string>
+    <string name="add_widget">Add widget</string>
+    <string name="full_name">نام کاربر</string>
+    <string name="email">آدرس پست الکترونیکی</string>
+    <string name="choosePic">انتخاب عکس</string>
+    <string name="neededBudget">بودجه مورد نیاز</string>
+    <string name="wishTitle">عنوان آرزو</string>
+    <string name="save">ذخیره</string>
+    <string name="wishDescription">توضیحات</string>
+    <string name="ویرایش">edit</string>
+
 </resources>
