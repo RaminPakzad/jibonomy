@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import sadad.com.jibonomy.R;
-import sadad.com.jibonomy.biz.entity.Transaction;
+import sadad.com.jibonomy.entities.Transaction;
 
 public class TransactionGlimpseAdapter extends RecyclerView.Adapter<TransactionGlimpseAdapter.MyViewHolder> {
 
