@@ -21,6 +21,7 @@ import java.util.Random;
 import sadad.com.jibonomy.entities.Wish;
 import sadad.com.jibonomy.services.WishService;
 import sadad.com.jibonomy.utils.ImageSaver;
+import sadad.com.jibonomy.utils.NavigationUtil;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -51,7 +52,7 @@ public class WishFragment extends android.support.v4.app.Fragment {
 
 
         if (getArguments() != null) {
-            Long wishId = getArguments().getLong(Wish.WISH_ID_LABLE);
+            Long wishId = getArguments().getLong(Wish.WISH_ID_LABEL);
             Wish wish = wishService.getWish(wishId);
             wishTitle.setText(wish.getName());
             wishDescription.setText(wish.getDescription());
@@ -99,6 +100,7 @@ public class WishFragment extends android.support.v4.app.Fragment {
                 ////////////////////////////////////////////////
 
                 wishService.insert(wish);
+                NavigationUtil.changeFragment(new WishListFragment(),rootView);
             }
         });
 
