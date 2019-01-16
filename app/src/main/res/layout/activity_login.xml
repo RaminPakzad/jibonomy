@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity"
+    android:background="@color/primaryBlue"
+    android:paddingTop="100dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.synnapps.carouselview.CarouselView
+            android:id="@+id/carouselView"
+            android:layout_width="match_parent"
+            android:layout_height="225dp"
+            app:fillColor="#FFFFFFFF"
+            app:pageColor="#00000000"
+            app:radius="4dp"
+            app:slideInterval="6000"
+            app:strokeColor="#FFFFFFFF"
+            app:indicatorMarginVertical="10dp"
+            app:strokeWidth="1dp"/>
+
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:hint="نام کاربری"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:inputType="text" />
+
+        <EditText
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:hint="رمزعبور"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:inputType="textPassword"/>
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:text="ورود"/>
+
+    </LinearLayout>
+
+
+
+
+
+</android.support.constraint.ConstraintLayout>

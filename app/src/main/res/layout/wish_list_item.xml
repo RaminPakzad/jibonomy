@@ -4,60 +4,72 @@
     android:layout_width="match_parent"
     android:layout_height="180dp"
 
-    android:background="@mipmap/wish_01"
-    android:layout_marginTop="2dp">
+    android:layout_marginTop="2dp"
+    android:background="@mipmap/wish_01">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+        <ImageButton
+            android:id="@+id/editWish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_margin="3dp"
+            android:src="@drawable/pencil" />
+
+        <ImageButton
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:layout_margin="3dp"
+            android:src="@drawable/remove" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="#85000000"></RelativeLayout>
+        android:background="#66000000"></RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/dark_gradiant"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:layout_alignParentBottom="true">
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp">
 
         <TextView
             android:id="@+id/title"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/progress_bar"
-            android:layout_alignParentLeft="true"
-            android:textSize="16dp"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/small_text_size"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/progress_percent"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_above="@+id/progress_bar"
-            android:textSize="28dp"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/white"
+            android:textSize="@dimen/largeFontSize"
             android:textStyle="normal" />
 
-        <Button
-            android:id="@+id/editWish"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ویرایش"
-            />
 
         <ProgressBar
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"/>
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
-
-
-
-
 </RelativeLayout>
