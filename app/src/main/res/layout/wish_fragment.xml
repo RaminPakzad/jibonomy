@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/wishTitle"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:hint="@string/wishTitle"
+            android:inputType="text"
+            android:textColor="@color/darkFont"
+            android:textColorHint="@color/lightFont" />
+
+        <EditText
+            android:id="@+id/neededBudget"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:hint="@string/neededBudget"
+            android:inputType="number"
+            android:textColor="@color/darkFont"
+            android:textColorHint="@color/lightFont" />
+
+        <EditText
+            android:id="@+id/wishDescription"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:hint="@string/wishDescription"
+            android:inputType="text"
+            android:textColor="@color/darkFont"
+            android:textColorHint="@color/lightFont" />
+
+        <Button
+            android:id="@+id/choosePic"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:text="@string/choosePic" />
+
+        <ImageView
+            android:id="@+id/wishImage"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/saveWish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:text="@string/save" />
+
+
+</RelativeLayout>

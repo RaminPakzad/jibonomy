@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+
+    android:background="@mipmap/wish_01"
+    android:layout_marginTop="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="#85000000"></RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/dark_gradiant"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/title"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/progress_bar"
+            android:layout_alignParentLeft="true"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/progress_percent"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_above="@+id/progress_bar"
+            android:textSize="28dp"
+            android:textStyle="normal" />
+
+        <Button
+            android:id="@+id/editWish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ویرایش"
+            />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
