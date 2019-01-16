@@ -2,26 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:icon="@drawable/home"
+        android:icon="@drawable/wish_list"
         android:title="@string/home" />
-
     <item
         android:id="@+id/wish_list"
         android:icon="@drawable/genie"
         android:title="@string/wish_list" />
-
     <item
+
         android:id="@+id/add_transaction"
         android:icon="@drawable/coin"
         android:title="@string/add_transaction" />
-
     <item
         android:id="@+id/action_navigation"
-        android:icon="@drawable/dashboard"
+        android:icon="@drawable/home"
         android:title="@string/dashboard" />
 
     <item
-        android:id="@+id/home1"
+        android:id="@+id/action_navigationtest"
         android:icon="@drawable/home"
-        android:title="@string/home" />
+        android:title="@string/dashboard" />
 </menu>
