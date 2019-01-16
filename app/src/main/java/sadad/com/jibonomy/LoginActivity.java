@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     LoginActivity loginActivity;
     Button loginButton;
     CarouselView carouselView;
-    int[] sampleImages = {R.mipmap.into_slider_04,R.mipmap.into_slider_01,R.mipmap.into_slider_02,R.mipmap.into_slider_03};
+    int[] sampleImages = {R.drawable.into_slider_04,R.drawable.into_slider_01,R.drawable.into_slider_02,R.drawable.into_slider_03};
 
     UserService userService;
 
