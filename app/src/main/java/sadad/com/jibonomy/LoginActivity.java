@@ -2,6 +2,7 @@ package sadad.com.jibonomy;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,7 +19,7 @@ import sadad.com.jibonomy.utils.NotifyUtil;
 public class LoginActivity extends AppCompatActivity {
 
     LoginActivity loginActivity;
-    Button loginButton;
+    Button loginButton, ssoLoginButton;
     CarouselView carouselView;
     int[] sampleImages = {R.drawable.into_slider_04,R.drawable.into_slider_01,R.drawable.into_slider_02,R.drawable.into_slider_03};
 
@@ -47,6 +48,16 @@ public class LoginActivity extends AppCompatActivity {
                 editor.apply();
                 Intent intent = new Intent(loginActivity, MainActivity.class);
                 loginActivity.startActivity( intent );
+            }
+        });
+
+
+        ssoLoginButton = findViewById(R.id.sso_login_button);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://pfm.myoxygen.ir/auth/realms/master/protocol/openid-connect/auth?response_type=code&state=&client_id=3ccbab92-4b93-4bf4-82bb-0ccd5c88&client_secret=b5facf85-9428-4702-bf89-64c3b7a5ebad&scope=&redirect_uri=http://172.31.111.39/jibonomy/"));
+                startActivity(browserIntent);
             }
         });
 
