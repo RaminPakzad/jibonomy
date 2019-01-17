@@ -19,7 +19,7 @@ import sadad.com.jibonomy.entities.SubCategory;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.entities.Wish;
 
-@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 6, exportSchema = false)
+@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 7, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class JibonomyRoomDatabase extends RoomDatabase {
 
