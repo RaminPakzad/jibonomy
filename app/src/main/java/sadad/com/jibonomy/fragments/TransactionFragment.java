@@ -1,5 +1,6 @@
 package sadad.com.jibonomy.fragments;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,7 +16,13 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mohamadamin.persianmaterialdatetimepicker.date.DatePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.time.RadialPickerLayout;
+import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
+import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
+
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,6 +42,7 @@ public class TransactionFragment extends Fragment {
     View rootView;
     EditText amount;
     TextView dateOfTransaction;
+    TextView timeOfTransaction;
     TextView selectCategory;
     EditText transactionDescription;
     Button saveTransaction;
@@ -42,6 +50,8 @@ public class TransactionFragment extends Fragment {
     CategoryService categoryService;
     SubCategoryService subCategoryService;
     Long selectedSubCategory;
+    Long selectedDate;
+    String selectedTime;
     private TransactionService transactionService;
 
     @Nullable
@@ -53,7 +63,58 @@ public class TransactionFragment extends Fragment {
         subCategoryService = new SubCategoryService(rootView.getContext());
         amount = rootView.findViewById(R.id.amount);
         dateOfTransaction = rootView.findViewById(R.id.dateOfTransaction);
+        timeOfTransaction = rootView.findViewById(R.id.timeOfTransaction);
 
+        timeOfTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PersianCalendar persianCalendar = new PersianCalendar(new Date().getTime());
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
+                                String hourString = hourOfDay < 10 ? "0" + hourOfDay : "" + hourOfDay;
+                                String minuteString = minute < 10 ? "0" + minute : "" + minute;
+                                String time =  hourString + ":" + minuteString;
+                                Toast.makeText(rootView.getContext(), time, Toast.LENGTH_LONG).show();
+                                selectedTime = hourString + minuteString;
+                                timeOfTransaction.setText(time);
+                            }
+                        }, persianCalendar.get(PersianCalendar.HOUR_OF_DAY),
+                        persianCalendar.get(PersianCalendar.MINUTE),
+                        true);
+
+
+                android.app.FragmentManager fragmentManager = ((Activity) rootView.getContext()).getFragmentManager();
+                timePickerDialog.show(fragmentManager, "TimePickerDialog");
+            }
+
+
+        });
+        dateOfTransaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                PersianCalendar persianCalendar = new PersianCalendar();
+                DatePickerDialog datePickerDialog = DatePickerDialog.newInstance(
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+                                String date = year + "/" + (monthOfYear + 1) + "/" + dayOfMonth;
+                                Toast.makeText(rootView.getContext(), "Date: " + date, Toast.LENGTH_LONG).show();
+                                selectedDate = Long.valueOf(date.replace("/", ""));
+                                dateOfTransaction.setText(date);
+                            }
+                        },
+                        persianCalendar.getPersianYear(),
+                        persianCalendar.getPersianMonth(),
+                        persianCalendar.getPersianDay()
+                );
+
+
+                android.app.FragmentManager fragmentManager = ((Activity) rootView.getContext()).getFragmentManager();
+                datePickerDialog.show(fragmentManager, "DatePickerDialog");
+            }
+        });
         transactionDescription = rootView.findViewById(R.id.transactionDescription);
         selectCategory = rootView.findViewById(R.id.selectCategory);
         saveTransaction = rootView.findViewById(R.id.saveTransaction);
@@ -65,8 +126,8 @@ public class TransactionFragment extends Fragment {
                 transaction.setAmount(new BigDecimal(amount.getText().toString()));
                 transaction.setSubCategoryType(selectedSubCategory);
                 transaction.setDescription(transactionDescription.getText().toString());
-                transaction.setTransactionDate(13970101L);
-                transaction.setTransactionTime("1440");
+                transaction.setTransactionDate(selectedDate);
+                transaction.setTransactionTime(selectedTime);
                 RadioButton radio = rootView.findViewById(radioTransactionType.getCheckedRadioButtonId());
                 transaction.setTransactionType(Byte.valueOf(radio.getTag().toString()));
                 transactionService.insert(transaction);
