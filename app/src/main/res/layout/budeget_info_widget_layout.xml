@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_sq_green"
+    android:id="@+id/widget"
+    android:padding="@dimen/widget_margin">
+
+    <ImageView
+        android:src="@drawable/ic_chart_bar_white_48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_alignParentRight="true"/>
+
+
+    <TextView
+        android:id="@+id/widget_budget_amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/widget_budget_percent_text"
+        android:layout_below="@+id/widget_budget_percent_text"
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:text=" مقدار باقیمانده از بودجه: 10000 تومان"
+        android:layout_marginTop="-5dp"
+        android:textColor="@color/white"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/widget_budget_percent_text"
+        android:textColor="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:text="40%"
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:layout_alignParentLeft="true"
+        android:textSize="35sp"/>
+
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar_alert"
+        android:textColor="@color/white"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:progress="70"
+        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"/>
+
+
+</RelativeLayout>
