@@ -38,6 +38,8 @@
     <string name="transactionDescription">توضیحات</string>
     <string name="radioExpense">هزینه</string>
     <string name="radioIncome">درآمد</string>
-    <string name="selectCategory">انتخاب نوع</string>
+    <string name="selectCategory">انتخاب نوع تراکنش</string>
+    <string name="pickDate">انتخاب تاریخ</string>
+    <string name="pickTime">انتخاب ساعت</string>
 
 </resources>

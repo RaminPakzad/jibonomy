@@ -43,26 +43,51 @@
             android:textColor="@color/darkFont"
             android:textColorHint="@color/lightFont" />
 
+
         <TextView
             android:id="@+id/dateOfTransaction"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
+            android:background="@color/datePickerColor"
             android:fontFamily="@font/iran_sans_web_fa_num"
+            android:padding="3dp"
+            android:text="@string/pickDate"
+            android:textAlignment="center"
             android:textColor="@color/darkFont"
-            android:textColorHint="@color/lightFont" />
+            android:textColorHint="@color/lightFont"
+            android:textSize="@dimen/small_text_size" />
 
 
+        <TextView
+            android:id="@+id/timeOfTransaction"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
+            android:background="@color/datePickerColor"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:padding="3dp"
+            android:text="@string/pickTime"
+            android:textAlignment="center"
+            android:textColor="@color/darkFont"
+            android:textColorHint="@color/lightFont"
+            android:textSize="@dimen/small_text_size" />
 
         <TextView
             android:id="@+id/selectCategory"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@color/datePickerColor"
             android:fontFamily="@font/iran_sans_web_fa_num"
+            android:padding="3dp"
             android:text="@string/selectCategory"
+            android:textAlignment="center"
             android:textColor="@color/darkFont"
-            android:textColorHint="@color/lightFont" />
+            android:textColorHint="@color/lightFont"
+            android:textSize="@dimen/small_text_size" />
 
 
         <EditText
@@ -85,6 +110,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:fontFamily="@font/iran_sans_web_fa_num"
+        android:textSize="@dimen/medium_text_size"
+        android:background="@color/saveButton"
         android:text="@string/save" />
 
 
