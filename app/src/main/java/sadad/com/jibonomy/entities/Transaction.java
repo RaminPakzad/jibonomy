@@ -5,7 +5,6 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 @Entity(tableName = "Transactions")
 public class Transaction {
@@ -20,8 +19,8 @@ public class Transaction {
     private String transactionTime;
     @ColumnInfo(name = "description")
     private String description;
-    @ColumnInfo(name = "categoryType")
-    private Byte categoryType;
+    @ColumnInfo(name = "subCategoryType")
+    private Long subCategoryType;
     @ColumnInfo(name = "transactionType")
     private Byte transactionType;
     @ColumnInfo(name = "amount")
@@ -59,12 +58,12 @@ public class Transaction {
         this.description = description;
     }
 
-    public Byte getCategoryType() {
-        return categoryType;
+    public Long getSubCategoryType() {
+        return subCategoryType;
     }
 
-    public void setCategoryType(Byte categoryType) {
-        this.categoryType = categoryType;
+    public void setSubCategoryType(Long subCategoryType) {
+        this.subCategoryType = subCategoryType;
     }
 
     public Byte getTransactionType() {

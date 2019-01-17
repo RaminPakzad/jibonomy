@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,13 +36,12 @@ public class TransactionFragment extends Fragment {
     EditText amount;
     TextView dateOfTransaction;
     TextView selectCategory;
-    Spinner category;
     EditText transactionDescription;
     Button saveTransaction;
     RadioGroup radioTransactionType;
     CategoryService categoryService;
     SubCategoryService subCategoryService;
-
+    Long selectedSubCategory;
     private TransactionService transactionService;
 
     @Nullable
@@ -65,7 +63,7 @@ public class TransactionFragment extends Fragment {
             public void onClick(View view) {
                 Transaction transaction = new Transaction();
                 transaction.setAmount(new BigDecimal(amount.getText().toString()));
-                transaction.setCategoryType((byte) 1);
+                transaction.setSubCategoryType(selectedSubCategory);
                 transaction.setDescription(transactionDescription.getText().toString());
                 transaction.setTransactionDate(13970101L);
                 transaction.setTransactionTime("1440");
@@ -103,15 +101,16 @@ public class TransactionFragment extends Fragment {
                     @Override
                     public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
                         String categoryName = categoryList.get(groupPosition).getCategoryName();
-                        String subCategoryName = subCategoryMap.get(
-                                categoryList.get(groupPosition).getCategoryId()).get(
-                                childPosition).getSubCategoryName();
-                        Toast.makeText(
-                                view.getContext(), categoryName + " : " + subCategoryName, Toast.LENGTH_SHORT).show();
-                        String text = categoryName + "/" + subCategoryName;
-                        selectCategory.setText(text);
+                        SubCategory subCategory = getSubCategory(groupPosition, childPosition);
+                        //Toast.makeText(view.getContext(), categoryName + " : " + subCategory, Toast.LENGTH_SHORT).show();
+                        selectCategory.setText(categoryName + "/" + subCategory.getSubCategoryName());
+                        selectedSubCategory = subCategory.getSubCategoryId();
                         dialog.hide();
                         return false;
+                    }
+
+                    private SubCategory getSubCategory(int groupPosition, int childPosition) {
+                        return subCategoryMap.get(categoryList.get(groupPosition).getCategoryId()).get(childPosition);
                     }
                 });
                 prepareListData();
