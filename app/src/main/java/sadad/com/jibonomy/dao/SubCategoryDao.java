@@ -32,6 +32,9 @@ public interface SubCategoryDao {
     @Query("SELECT * from SubCategory where  subCategoryId = :subCategoryId  ")
     SubCategory get(Long subCategoryId);
 
+    @Query("SELECT * from SubCategory where tag = 'undefined'")
+    SubCategory getUndefinedSubCategory();
+
     @Query("delete from SubCategory where  subCategoryId = :subCategoryId ")
     void delete(Long subCategoryId);
 }

@@ -18,8 +18,11 @@ import sadad.com.jibonomy.entities.Category;
 import sadad.com.jibonomy.entities.SubCategory;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.entities.Wish;
+import sadad.com.jibonomy.utils.StringUtil;
 
-@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 7, exportSchema = false)
+import static sadad.com.jibonomy.utils.StringUtil.UNDEFINED_TAG;
+
+@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 9, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class JibonomyRoomDatabase extends RoomDatabase {
 
@@ -88,6 +91,7 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
 
             asyncCategoryDao.deleteAll();
             asyncSubCategoryDao.deleteAll();
+            asyncTransactionDao.deleteAll();
 
             Category category = new Category();
             category.setCategoryId(1L);
@@ -120,17 +124,24 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
 
 
             Category category4 = new Category();
-            category4.setCategoryId(5L);
+
             category4.setBudget(new BigDecimal(22222));
 
             category4.setCategoryName("درمانی");
             category4.setIconName("ic_hospital_building_grey600_24dp");
 
-
+////////////////////////undefined
+            Category undefinedCategory = new Category();
+            undefinedCategory.setBudget(new BigDecimal(1000000000));
+            undefinedCategory.setCategoryName("نامشخص");
+            undefinedCategory.setTag(UNDEFINED_TAG);
+            undefinedCategory.setIconName("question");
+////////////////////////undefined
             asyncCategoryDao.insert(category);
             asyncCategoryDao.insert(category1);
             asyncCategoryDao.insert(category2);
             asyncCategoryDao.insert(category3);
+            asyncCategoryDao.insert(undefinedCategory);
 //////////////////////////
             SubCategory subCategory1 = new SubCategory();
             subCategory1.setSubCategoryName("sub2");
@@ -147,9 +158,22 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
             SubCategory subCategory4 = new SubCategory();
             subCategory4.setSubCategoryName("sub5");
             subCategory4.setIconName("home");
+            //////////////////////undefined
 
+
+            SubCategory subCategoryUndefined = new SubCategory();
+            subCategoryUndefined.setSubCategoryName("نامشخص");
+            subCategoryUndefined.setIconName("question");
+            subCategoryUndefined.setTag(StringUtil.UNDEFINED_TAG);
+            subCategoryUndefined.setCategoryId(asyncCategoryDao.getUnDefinedCategory().getCategoryId());
+            asyncSubCategoryDao.insert(subCategoryUndefined);
+
+            //////////////////////undefined
             List<Category> cats = asyncCategoryDao.getAll();
-            for (Category item:cats){
+            for (Category item : cats) {
+                if (item.getTag() != null && item.getTag().equals(UNDEFINED_TAG)) {
+                    continue;
+                }
                 subCategory1.setCategoryId(item.getCategoryId());
                 subCategory2.setCategoryId(item.getCategoryId());
                 subCategory3.setCategoryId(item.getCategoryId());
@@ -162,17 +186,17 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
             }
 
             List<SubCategory> subcat = asyncSubCategoryDao.getAll();
-            for( int i= 0 ; i < 20 ; i ++){
+            for (int i = 0; i < 20; i++) {
                 Transaction transaction = new Transaction();
                 Byte[] type = {(byte) 1, (byte) 2};
-                SubCategory s = subcat.get( (int) (Math.random() * subcat.size())  );
-                transaction.setAmount( new BigDecimal( Math.floor(Math.random()*100) * 1000) );
+                SubCategory s = subcat.get((int) (Math.random() * subcat.size()));
+                transaction.setAmount(new BigDecimal(Math.floor(Math.random() * 100) * 1000));
                 transaction.setDescription("Some Description");
-                transaction.setSubCategoryType( s.getSubCategoryId() );
-                transaction.setTransactionType( type[(int)Math.round(Math.random())] );
+                transaction.setSubCategoryType(s.getSubCategoryId());
+                transaction.setTransactionType(type[(int) Math.round(Math.random())]);
                 transaction.setTransactionTime("2000");
                 transaction.setTransactionDate("13970101");
-                Log.d("Transactions", transaction.toString() );
+                Log.d("Transactions", transaction.toString());
                 asyncTransactionDao.insert(transaction);
             }
 

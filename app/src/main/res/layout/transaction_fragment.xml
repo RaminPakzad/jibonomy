@@ -15,21 +15,23 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/radioIncome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:tag="2"
+                android:text="@string/radioIncome" />
 
             <RadioButton
                 android:id="@+id/radioExpense"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:tag="1"
+                android:checked="true"
                 android:text="@string/radioExpense" />
 
-            <RadioButton
-                android:id="@+id/radioIncome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:tag="2"
-                android:text="@string/radioIncome" />
+
         </RadioGroup>
 
         <android.support.design.widget.TextInputLayout

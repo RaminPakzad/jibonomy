@@ -7,5 +7,6 @@ import java.text.DecimalFormat;
  */
 public class StringUtil {
     public static DecimalFormat df = new DecimalFormat("#,###");
+public static final String UNDEFINED_TAG = "undefined";
 
 }

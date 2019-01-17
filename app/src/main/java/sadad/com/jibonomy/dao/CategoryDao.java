@@ -28,4 +28,7 @@ public interface CategoryDao {
 
     @Query("delete from Category where  categoryId = :categoryId ")
     void delete(Long categoryId);
+
+    @Query("SELECT * from Category where  tag = 'undefined'  ")
+    Category getUnDefinedCategory();
 }

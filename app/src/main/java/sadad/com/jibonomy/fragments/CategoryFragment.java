@@ -124,7 +124,7 @@ public class CategoryFragment extends android.support.v4.app.Fragment {
             @Override
             public void onClick(View view) {
                 Category category = new Category();
-                category.setBudget(new BigDecimal(budget.getText().toString()));
+                category.setBudget(new BigDecimal(budget.getText().toString().replace(",","")));
                 category.setCategoryName(categoryName.getText().toString());
                 category.setIconName("other");
                 categoryService.insert(category);
