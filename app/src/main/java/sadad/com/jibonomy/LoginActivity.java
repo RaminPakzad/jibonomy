@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,6 +47,21 @@ public class LoginActivity extends AppCompatActivity {
         loginActivity = this;
         userService = new UserService(getBaseContext());
         mAPIService = ApiUtils.getAPIService();
+
+
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Uri data = intent.getData();
+        if(data!=null) {
+            Log.d("DATA", "-> " + data.getQuery());
+            SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+            editor.putString("token", data.getQuery());
+            Intent intentSsoLogin = new Intent(loginActivity, MainActivity.class);
+            loginActivity.startActivity( intentSsoLogin );
+        } else {
+            Log.d("DATA", "-" );
+        }
+
         carouselView = (CarouselView) findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
@@ -73,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         ssoLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://pfm.myoxygen.ir/auth/realms/master/protocol/openid-connect/auth?response_type=code&state=&client_id=3ccbab92-4b93-4bf4-82bb-0ccd5c88&client_secret=b5facf85-9428-4702-bf89-64c3b7a5ebad&scope=&redirect_uri=http://172.31.111.39/jibonomy/"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://pfm.myoxygen.ir/auth/realms/master/protocol/openid-connect/auth?response_type=code&state=&client_id=3ccbab92-4b93-4bf4-82bb-0ccd5c88&client_secret=b5facf85-9428-4702-bf89-64c3b7a5ebad&scope=&redirect_uri=http://192.168.25.135/jibonomy/"));
                 startActivity(browserIntent);
             }
         });
