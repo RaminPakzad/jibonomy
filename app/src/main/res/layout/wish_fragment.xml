@@ -8,7 +8,9 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
-
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/wishTitle"
             android:layout_width="250dp"
@@ -19,7 +21,11 @@
             android:inputType="text"
             android:textColor="@color/darkFont"
             android:textColorHint="@color/lightFont" />
+        </android.support.design.widget.TextInputLayout>
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/neededBudget"
             android:layout_width="250dp"
@@ -30,7 +36,10 @@
             android:inputType="number"
             android:textColor="@color/darkFont"
             android:textColorHint="@color/lightFont" />
-
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <EditText
             android:id="@+id/wishDescription"
             android:layout_width="250dp"
@@ -41,7 +50,7 @@
             android:inputType="text"
             android:textColor="@color/darkFont"
             android:textColorHint="@color/lightFont" />
-
+        </android.support.design.widget.TextInputLayout>
         <Button
             android:id="@+id/choosePic"
             android:layout_width="250dp"
@@ -52,11 +61,9 @@
 
         <ImageView
             android:id="@+id/wishImage"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-
-            />
+            android:layout_gravity="center" />
 
     </LinearLayout>
 
@@ -65,8 +72,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="@color/saveButton"
         android:fontFamily="@font/iran_sans_web_fa_num"
-        android:text="@string/save" />
-
-
+        android:text="@string/save"
+        android:textSize="@dimen/medium_text_size" />
 </RelativeLayout>

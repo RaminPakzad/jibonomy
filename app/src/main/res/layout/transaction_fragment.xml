@@ -32,17 +32,22 @@
                 android:text="@string/radioIncome" />
         </RadioGroup>
 
-        <EditText
-            android:id="@+id/amount"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/iran_sans_web_fa_num"
-            android:hint="@string/amount"
-            android:inputType="number"
-            android:textColor="@color/darkFont"
-            android:textColorHint="@color/lightFont" />
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <EditText
+                android:id="@+id/amount"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/iran_sans_web_fa_num"
+                android:hint="@string/amount"
+                android:inputType="number"
+                android:textColor="@color/darkFont"
+                android:textColorHint="@color/lightFont" />
+
+        </android.support.design.widget.TextInputLayout>
 
         <TextView
             android:id="@+id/dateOfTransaction"
@@ -89,18 +94,21 @@
             android:textColorHint="@color/lightFont"
             android:textSize="@dimen/small_text_size" />
 
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/transactionDescription"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/iran_sans_web_fa_num"
-            android:hint="@string/transactionDescription"
-            android:inputType="text"
-            android:textColor="@color/darkFont"
-            android:textColorHint="@color/lightFont" />
-
+            <EditText
+                android:id="@+id/transactionDescription"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/iran_sans_web_fa_num"
+                android:hint="@string/transactionDescription"
+                android:inputType="text"
+                android:textColor="@color/darkFont"
+                android:textColorHint="@color/lightFont" />
+        </android.support.design.widget.TextInputLayout>
 
     </LinearLayout>
 
@@ -109,10 +117,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:fontFamily="@font/iran_sans_web_fa_num"
-        android:textSize="@dimen/medium_text_size"
         android:background="@color/saveButton"
-        android:text="@string/save" />
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:text="@string/save"
+        android:textSize="@dimen/medium_text_size" />
 
 
 </RelativeLayout>
