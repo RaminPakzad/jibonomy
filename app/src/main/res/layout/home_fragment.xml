@@ -15,30 +15,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_margin="@dimen/margin_side"
+            android:layout_marginTop="100dp"
+            android:layout_marginLeft="10dp"
             android:background="@color/transparent"
-            android:src="@drawable/ic_arrow_left_grey600_24dp" />
-
-        <TextView
-            android:id="@+id/monthName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="false"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/iran_sans_web_fa_num"
-            android:text="@string/firstMonth"
-            android:textSize="20sp" />
+            android:src="@drawable/ic_chevron_left_grey600_48dp" />
 
         <ImageButton
             android:id="@+id/next_month"
-            android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="@dimen/margin_side"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@+id/overallExpenseChart"
             android:background="@color/transparent"
-            android:src="@drawable/ic_arrow_right_grey600_24dp" />
+            android:padding="5dp"
+            android:src="@drawable/ic_chevron_right_grey600_48dp" />
 
         <LinearLayout
             android:id="@+id/center_view_data"
@@ -48,28 +40,42 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
             android:orientation="vertical"
-            android:background="#10000000">
+            android:background="#00000000"
+            android:paddingTop="32dp">
 
                 <TextView
+                    android:id="@+id/app_balance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/iran_sans_web_fa_num"
                     android:gravity="center"
+                    android:textSize="16sp"
                     android:text="10000"/>
 
-                <ImageButton
+                <View
+                    android:layout_width="80dp"
                     android:layout_gravity="center"
-                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:background="@color/tooLightGray"/>
+
+                <TextView
+                    android:layout_marginTop="5dp"
+                    android:id="@+id/monthName"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_add_alarm_black_36dp"/>
+                    android:fontFamily="@font/iran_sans_web_fa_num"
+                    android:textSize="12sp"
+                    android:text="@string/firstMonth"
+                    android:gravity="center" />
+
 
         </LinearLayout>
 
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/overallExpenseChart"
-            android:layout_width="match_parent"
+            android:layout_width="250dp"
             android:layout_height="250dp"
-            android:layout_below="@id/monthName"
             android:layout_centerHorizontal="true" />
 
         <android.support.v7.widget.RecyclerView

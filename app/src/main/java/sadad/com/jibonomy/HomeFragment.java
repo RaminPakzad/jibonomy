@@ -1,5 +1,6 @@
 package sadad.com.jibonomy;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -31,6 +32,7 @@ import com.github.mikephil.charting.utils.MPPointF;
 import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,8 +53,9 @@ public class HomeFragment extends Fragment {
     private RecyclerView transactionGlimpseList;
     private TransactionGlimpseAdapter transactionGlimpseAdapter;
     private TransactionService transactionService;
-    private TextView monthNameText;
+    private TextView monthNameText,appBalanceTextView;
     private View centerView;
+    SharedPreferences prefs;
 
     private String[] jaliliMonthList = {"","فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"};
     private int currentPosition = 1;
@@ -62,12 +65,17 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.home_fragment, container, false);
 
+        prefs = getContext().getSharedPreferences("user", getContext().MODE_PRIVATE);
+        DecimalFormat df = new DecimalFormat("#,###");
+        appBalanceTextView = (TextView) rootView.findViewById(R.id.app_balance);
+        appBalanceTextView.setText(df.format(prefs.getLong("appBalance",0)) + " ریال");
+
         transactionGlimpseList = rootView.findViewById(R.id.transactionGlimpseList);
-
         chart = rootView.findViewById(R.id.overallExpenseChart);
-
         List<Transaction> transactions = new ArrayList<>();
         transactionService = new TransactionService(getContext());
+
+        // chart center view
 
         // month controller
         monthNameText = (TextView) rootView.findViewById(R.id.monthName);
@@ -75,21 +83,18 @@ public class HomeFragment extends Fragment {
         ImageButton pre = (ImageButton) rootView.findViewById(R.id.pre_month);
         centerView = (View) rootView.findViewById(R.id.center_view_data);
         centerView.bringToFront();
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 nextMonth();
             }
         });
-
         pre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 preMonth();
             }
         });
-
 
         transactions = transactionService.getTransactiones();
         transactionGlimpseAdapter = new TransactionGlimpseAdapter(transactions, rootView.getContext());
@@ -107,25 +112,10 @@ public class HomeFragment extends Fragment {
         chart.setUsePercentValues(true);
         chart.getDescription().setEnabled(false);
         chart.setExtraOffsets(5, 10, 5, 5);
-
         chart.setDragDecelerationFrictionCoef(0.95f);
-
-//        chart.setCenterTextTypeface(tfLight);
-        //chart.setCenterText(generateCenterSpannableText());
-
-        //chart.setDrawHoleEnabled(true);
-        //chart.setHoleColor(Color.WHITE);
-
-        //chart.setTransparentCircleColor(Color.WHITE);
-        //chart.setTransparentCircleAlpha(110);
-
         chart.setHoleRadius(58f);
         chart.setTransparentCircleRadius(61f);
-
-        //chart.setDrawCenterText(true);
-
         chart.setRotationAngle(0);
-        //chart.setRotationEnabled(true);
         chart.setHighlightPerTapEnabled(true);
         chart.setDrawEntryLabels(false);
 
@@ -143,13 +133,6 @@ public class HomeFragment extends Fragment {
         setData();
     }
 
-    private SpannableString generateCenterSpannableText() {
-        String mpAndroidChart = "هزینه 120000";
-        String s1 = "درآمد1500000";
-        SpannableString s = new SpannableString(mpAndroidChart + "\n" + s1);
-        return s;
-    }
-
 
     private void setData() {
         ArrayList<PieEntry> entries = new ArrayList<>();
@@ -158,9 +141,6 @@ public class HomeFragment extends Fragment {
         PieDataSet dataSet = new PieDataSet(chartData, "Election Results");
         dataSet.setDrawIcons(false);
         chart.getLegend().setEnabled(false);
-        //dataSet.setSliceSpace(3f);
-        //dataSet.setIconsOffset(new MPPointF(0, 40));
-        //dataSet.setSelectionShift(5f);
         ArrayList<Integer> colors = new ArrayList<>();
 
         for (int c : ColorTemplate.VORDIPLOM_COLORS)

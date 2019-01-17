@@ -30,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         loginActivity = this;
-        userService = new UserService();
+        userService = new UserService(getBaseContext());
 
         carouselView = (CarouselView) findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("firstName", user.getFirstName());
                 editor.putString("lastName", user.getLastName());
                 editor.putString("email", user.getEmail());
+                editor.putLong("appBalance", 500000 );
                 editor.apply();
                 Intent intent = new Intent(loginActivity, MainActivity.class);
                 loginActivity.startActivity( intent );
@@ -53,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         ssoLoginButton = findViewById(R.id.sso_login_button);
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        ssoLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://pfm.myoxygen.ir/auth/realms/master/protocol/openid-connect/auth?response_type=code&state=&client_id=3ccbab92-4b93-4bf4-82bb-0ccd5c88&client_secret=b5facf85-9428-4702-bf89-64c3b7a5ebad&scope=&redirect_uri=http://172.31.111.39/jibonomy/"));
