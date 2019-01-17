@@ -75,8 +75,8 @@ public class TransactionFragment extends Fragment {
         });
 
         selectCategory.setOnClickListener(new View.OnClickListener() {
-            List<Category> listDataHeader;
-            HashMap<Long, List<SubCategory>> listDataChild;
+            List<Category> categoryList;
+            HashMap<Long, List<SubCategory>> subCategoryMap;
             private int lastExpandedPosition = -1;
 
             @Override
@@ -100,7 +100,7 @@ public class TransactionFragment extends Fragment {
                 });
                 prepareListData();
 
-                ExpandableListAdapter listAdapter = new ExpandableListAdapter(dialog.getContext(), listDataHeader, listDataChild);
+                ExpandableListAdapter listAdapter = new ExpandableListAdapter(dialog.getContext(), categoryList, subCategoryMap);
                 expListView.setAdapter(listAdapter);
 
                 // set the custom dialog components - text, image and button
@@ -123,18 +123,18 @@ public class TransactionFragment extends Fragment {
 
             private void prepareListData() {
 
-                listDataHeader = categoryService.getCategories();
-                listDataChild = new HashMap<>();
+                categoryList = categoryService.getCategories();
+                subCategoryMap = new HashMap<>();
 
-                for (Category category : listDataHeader) {
+                for (Category category : categoryList) {
                     List<SubCategory> subCategories = subCategoryService.getAllByCategoryId(category.getCategoryId());
-                    listDataChild.put(category.getCategoryId(), subCategories);
+                    subCategoryMap.put(category.getCategoryId(), subCategories);
                 }
 
                 // Adding child data
-//                listDataHeader.add("Top 250");
-//                listDataHeader.add("Now Showing");
-//                listDataHeader.add("Coming Soon..");
+//                categoryList.add("Top 250");
+//                categoryList.add("Now Showing");
+//                categoryList.add("Coming Soon..");
 
                 // Adding child data
 //                List<String> top250 = new ArrayList<String>();
@@ -161,9 +161,9 @@ public class TransactionFragment extends Fragment {
 //                comingSoon.add("The Canyons");
 //                comingSoon.add("Europa Report");
 //
-//                listDataChild.put(listDataHeader.get(0), top250); // Header, Child data
-//                listDataChild.put(listDataHeader.get(1), nowShowing);
-//                listDataChild.put(listDataHeader.get(2), comingSoon);
+//                subCategoryMap.put(categoryList.get(0), top250); // Header, Child data
+//                subCategoryMap.put(categoryList.get(1), nowShowing);
+//                subCategoryMap.put(categoryList.get(2), comingSoon);
             }
         });
 

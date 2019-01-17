@@ -9,7 +9,6 @@
         android:icon="@drawable/genie"
         android:title="@string/wish_list" />
     <item
-
         android:id="@+id/add_transaction"
         android:icon="@drawable/coin"
         android:title="@string/add_transaction" />
@@ -17,7 +16,6 @@
         android:id="@+id/action_navigation"
         android:icon="@drawable/home"
         android:title="@string/dashboard" />
-
     <item
         android:id="@+id/action_navigationtest"
         android:icon="@drawable/home"

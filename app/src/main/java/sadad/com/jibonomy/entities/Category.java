@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "Category")
 public class Category {
-    @PrimaryKey(/*autoGenerate = true*/)
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "categoryId")
     private Long categoryId;
 
