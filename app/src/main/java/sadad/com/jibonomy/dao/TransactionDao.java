@@ -33,6 +33,11 @@ public interface TransactionDao {
     @Query("select SubCategory.categoryId as lable ,SUM(Transactions.amount) as totalAmount  from Transactions left join SubCategory on Transactions.subCategoryType =  SubCategory.categoryId group by SubCategory.categoryId")
     List<ChartDataDto> sumAmountByCategoryGroup();
 
+    @Query("select SubCategory.categoryId as lable ,SUM(Transactions.amount) as totalAmount  from Transactions left join SubCategory on Transactions.subCategoryType =  SubCategory.categoryId WHERE substr(Transactions.transactionDate,5,2) == :month  group by SubCategory.categoryId ")
+    List<ChartDataDto> sumAmountByCategoryGroupWithMonth(String month);
+
+
+
 
 
 }

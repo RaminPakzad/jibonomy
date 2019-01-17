@@ -47,13 +47,24 @@ public class TransactionService {
         transactionDao.deleteAll();
     }
 
-    public List<PieEntry> getChartData(){
+
+
+    public List<PieEntry> getChartData( int month , boolean mock){
         List<PieEntry> chart = new ArrayList<>();
-        List<ChartDataDto> res = transactionDao.sumAmountByCategoryGroup();
-        for (ChartDataDto item:res){
-            Log.d("getChartData", "dd" );
-            if( item.getLable() != null){
-                chart.add( new PieEntry(item.getTotalAmount(),item.getLable() ));
+        if(mock == true){
+            String m = ( month < 10 ? "0"+month : ""+month);
+            CategoryService categoryService = new CategoryService(context);
+            List<Category> cl = categoryService.getCategories();
+            for (Category c:cl){
+                chart.add( new PieEntry( (long) Math.floor(Math.random()*1000)*1000 , c.getCategoryName() ));
+            }
+        } else {
+            String m = ( month < 10 ? "0"+month : ""+month);
+            List<ChartDataDto> res = transactionDao.sumAmountByCategoryGroupWithMonth(m);
+            for (ChartDataDto item:res){
+                if( item.getLable() != null){
+                    chart.add( new PieEntry(item.getTotalAmount(),item.getLable() ));
+                }
             }
         }
         return chart;

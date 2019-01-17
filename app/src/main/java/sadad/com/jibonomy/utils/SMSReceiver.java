@@ -55,7 +55,7 @@ public class SMSReceiver extends BroadcastReceiver {
                             transaction.setSubCategoryType(999999L);
                             transaction.setDescription("SMS");
                             PersianCalendar persianCalendar = new PersianCalendar(new Date().getTime());
-                            transaction.setTransactionDate(Long.valueOf(persianCalendar.getPersianShortDate().replace("/", "")));
+                            transaction.setTransactionDate(persianCalendar.getPersianShortDate().replace("/", ""));
                             Integer hour = persianCalendar.get(PersianCalendar.HOUR_OF_DAY);
                             Integer min = persianCalendar.get(PersianCalendar.MINUTE);
                             transaction.setTransactionTime(hour.toString() + min.toString());

@@ -154,7 +154,7 @@ public class HomeFragment extends Fragment {
     private void setData() {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
-        List<PieEntry> chartData = transactionService.getChartData();
+        List<PieEntry> chartData = transactionService.getChartData( currentPosition , true );
         PieDataSet dataSet = new PieDataSet(chartData, "Election Results");
         dataSet.setDrawIcons(false);
         chart.getLegend().setEnabled(false);
@@ -198,6 +198,7 @@ public class HomeFragment extends Fragment {
             currentPosition++;
         }
         monthNameText.setText(jaliliMonthList[currentPosition]);
+        setData();
     }
 
     public void preMonth(){
@@ -207,5 +208,6 @@ public class HomeFragment extends Fragment {
             currentPosition--;
         }
         monthNameText.setText(jaliliMonthList[currentPosition]);
+        setData();
     }
 }

@@ -19,7 +19,7 @@ import sadad.com.jibonomy.entities.SubCategory;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.entities.Wish;
 
-@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 5, exportSchema = false)
+@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 6, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class JibonomyRoomDatabase extends RoomDatabase {
 
@@ -162,7 +162,7 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
                 transaction.setSubCategoryType( s.getSubCategoryId() );
                 transaction.setTransactionType( type[(int)Math.round(Math.random())] );
                 transaction.setTransactionTime("2000");
-                transaction.setTransactionDate((long) 13971101);
+                transaction.setTransactionDate("13970101");
                 Log.d("Transactions", transaction.toString() );
                 asyncTransactionDao.insert(transaction);
             }

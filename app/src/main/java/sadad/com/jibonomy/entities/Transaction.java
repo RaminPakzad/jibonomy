@@ -14,7 +14,7 @@ public class Transaction {
     @ColumnInfo(name = "transactionId")
     private Long transactionId;
     @ColumnInfo(name = "transactionDate")
-    private Long transactionDate;
+    private String transactionDate;
     @ColumnInfo(name = "transactionTime")
     private String transactionTime;
     @ColumnInfo(name = "description")
@@ -34,11 +34,11 @@ public class Transaction {
         this.transactionId = transactionId;
     }
 
-    public Long getTransactionDate() {
+    public String getTransactionDate() {
         return transactionDate;
     }
 
-    public void setTransactionDate(Long transactionDate) {
+    public void setTransactionDate(String transactionDate) {
         this.transactionDate = transactionDate;
     }
 

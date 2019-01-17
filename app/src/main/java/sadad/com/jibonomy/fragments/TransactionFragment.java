@@ -126,7 +126,7 @@ public class TransactionFragment extends Fragment {
                 transaction.setAmount(new BigDecimal(amount.getText().toString()));
                 transaction.setSubCategoryType(selectedSubCategory);
                 transaction.setDescription(transactionDescription.getText().toString());
-                transaction.setTransactionDate(selectedDate);
+                transaction.setTransactionDate(Long.toString(selectedDate));
                 transaction.setTransactionTime(selectedTime);
                 RadioButton radio = rootView.findViewById(radioTransactionType.getCheckedRadioButtonId());
                 transaction.setTransactionType(Byte.valueOf(radio.getTag().toString()));
