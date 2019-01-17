@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import sadad.com.jibonomy.ExpandableListAdapter;
+import sadad.com.jibonomy.HomeFragment;
 import sadad.com.jibonomy.R;
 import sadad.com.jibonomy.entities.Category;
 import sadad.com.jibonomy.entities.SubCategory;
@@ -34,6 +35,7 @@ import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.services.CategoryService;
 import sadad.com.jibonomy.services.SubCategoryService;
 import sadad.com.jibonomy.services.TransactionService;
+import sadad.com.jibonomy.utils.NavigationUtil;
 
 /**
  * @author ramin pakzad (RPakzadmanesh@gmail.com) on 1/16/2019.
@@ -75,7 +77,7 @@ public class TransactionFragment extends Fragment {
                             public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute) {
                                 String hourString = hourOfDay < 10 ? "0" + hourOfDay : "" + hourOfDay;
                                 String minuteString = minute < 10 ? "0" + minute : "" + minute;
-                                String time =  hourString + ":" + minuteString;
+                                String time = hourString + ":" + minuteString;
                                 Toast.makeText(rootView.getContext(), time, Toast.LENGTH_LONG).show();
                                 selectedTime = hourString + minuteString;
                                 timeOfTransaction.setText(time);
@@ -131,6 +133,7 @@ public class TransactionFragment extends Fragment {
                 RadioButton radio = rootView.findViewById(radioTransactionType.getCheckedRadioButtonId());
                 transaction.setTransactionType(Byte.valueOf(radio.getTag().toString()));
                 transactionService.insert(transaction);
+                NavigationUtil.changeFragment(new HomeFragment(), rootView);
             }
         });
 

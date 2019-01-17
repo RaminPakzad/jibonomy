@@ -18,6 +18,7 @@ import sadad.com.jibonomy.R;
 import sadad.com.jibonomy.biz.dto.smsDto;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.services.SmsService;
+import sadad.com.jibonomy.services.SubCategoryService;
 import sadad.com.jibonomy.services.TransactionService;
 
 public class SMSReceiver extends BroadcastReceiver {
@@ -25,10 +26,12 @@ public class SMSReceiver extends BroadcastReceiver {
     private SmsMessage currentSMS;
     private String message;
     private TransactionService transactionService;
+    private SubCategoryService subCategoryService;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         transactionService = new TransactionService(context);
+        subCategoryService = new SubCategoryService(context);
 //        NotifyUtil.notify(context);
 
         if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")) {
@@ -52,7 +55,7 @@ public class SMSReceiver extends BroadcastReceiver {
                             Transaction transaction = new Transaction();
                             String amount = smsDto.getAmount().replace("+", "").replace("-", "").replace(",", "");
                             transaction.setAmount(new BigDecimal(amount));
-                            transaction.setSubCategoryType(999999L);
+                            transaction.setSubCategoryType(subCategoryService.getUndefinedSubCategory().getSubCategoryId());
                             transaction.setDescription("SMS");
                             PersianCalendar persianCalendar = new PersianCalendar(new Date().getTime());
                             transaction.setTransactionDate(persianCalendar.getPersianShortDate().replace("/", ""));

@@ -27,6 +27,9 @@ public interface TransactionDao {
     @Query("SELECT * from Transactions where  transactionId = :transactionId ")
     Transaction get(Long transactionId);
 
+    @Query("SELECT * from Transactions where  transactionDate = :transactionDate")
+    List<Transaction> getByTransactionDate(String transactionDate);
+
     @Query("delete from Transactions where  transactionId = :transactionId")
     void delete(Long transactionId);
 

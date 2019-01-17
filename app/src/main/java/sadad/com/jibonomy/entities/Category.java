@@ -20,8 +20,19 @@ public class Category {
     @ColumnInfo(name = "iconName")
     private String iconName;
 
+    @ColumnInfo(name = "tag")
+    private String tag;
+
     @ColumnInfo(name = "budget")
     private BigDecimal budget;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public BigDecimal getBudget() {
         return budget;

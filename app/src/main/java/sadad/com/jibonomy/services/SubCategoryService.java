@@ -48,4 +48,8 @@ public class SubCategoryService {
     public void deleteByCategoryIdAndSubCategoryName(Long categoryId, String subCategoryName) {
         subCategoryDao.deleteByCategoryIdAndSubCategoryName(categoryId, subCategoryName);
     }
+
+    public SubCategory getUndefinedSubCategory() {
+        return subCategoryDao.getUndefinedSubCategory();
+    }
 }
