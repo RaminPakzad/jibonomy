@@ -36,6 +36,9 @@ public class TransactionService {
     }
 
     public void insert(Transaction transaction) {
+        if (transaction.getDescription().equals("SMS")) {
+            NotifyUtil.sendNotification(context);
+        }
         if (transaction.getTransactionType().equals(Transaction.EXPENSE)) {
             PersianCalendar persianCalendar = new PersianCalendar(new Date().getTime());
             String persianDate = persianCalendar.getPersianShortDate().replace("/", "");

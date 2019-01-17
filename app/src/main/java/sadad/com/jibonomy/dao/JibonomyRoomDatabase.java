@@ -18,6 +18,9 @@ import sadad.com.jibonomy.entities.Category;
 import sadad.com.jibonomy.entities.SubCategory;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.entities.Wish;
+import sadad.com.jibonomy.utils.StringUtil;
+
+import static sadad.com.jibonomy.utils.StringUtil.UNDEFINED_TAG;
 
 @Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 9, exportSchema = false)
 @TypeConverters({Converters.class})
@@ -128,18 +131,17 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
             category4.setIconName("ic_hospital_building_grey600_24dp");
 
 ////////////////////////undefined
-            Category category5 = new Category();
-            category5.setCategoryId(6L);
-            category5.setBudget(new BigDecimal(1000000000));
-            category5.setCategoryName("نامشخص");
-            category5.setTag("undefined");
-            category5.setIconName("question");
+            Category undefinedCategory = new Category();
+            undefinedCategory.setBudget(new BigDecimal(1000000000));
+            undefinedCategory.setCategoryName("نامشخص");
+            undefinedCategory.setTag(UNDEFINED_TAG);
+            undefinedCategory.setIconName("question");
 ////////////////////////undefined
             asyncCategoryDao.insert(category);
             asyncCategoryDao.insert(category1);
             asyncCategoryDao.insert(category2);
             asyncCategoryDao.insert(category3);
-            asyncCategoryDao.insert(category5);
+            asyncCategoryDao.insert(undefinedCategory);
 //////////////////////////
             SubCategory subCategory1 = new SubCategory();
             subCategory1.setSubCategoryName("sub2");
@@ -156,16 +158,20 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
             SubCategory subCategory4 = new SubCategory();
             subCategory4.setSubCategoryName("sub5");
             subCategory4.setIconName("home");
-            //////////////////////undefind
-            Category undefinedCategory= asyncCategoryDao.getUnDefinedCategory();
-            SubCategory subCategory5 = new SubCategory();
-            subCategory5.setSubCategoryName("نامشخص");
-            subCategory5.setIconName("question");
-            subCategory5.setCategoryId(undefinedCategory.getCategoryId());
+            //////////////////////undefined
 
+
+            SubCategory subCategoryUndefined = new SubCategory();
+            subCategoryUndefined.setSubCategoryName("نامشخص");
+            subCategoryUndefined.setIconName("question");
+            subCategoryUndefined.setTag(StringUtil.UNDEFINED_TAG);
+            subCategoryUndefined.setCategoryId(asyncCategoryDao.getUnDefinedCategory().getCategoryId());
+            asyncSubCategoryDao.insert(subCategoryUndefined);
+
+            //////////////////////undefined
             List<Category> cats = asyncCategoryDao.getAll();
             for (Category item : cats) {
-                if (item.getTag() != null && item.getTag().equals("undefined")) {
+                if (item.getTag() != null && item.getTag().equals(UNDEFINED_TAG)) {
                     continue;
                 }
                 subCategory1.setCategoryId(item.getCategoryId());

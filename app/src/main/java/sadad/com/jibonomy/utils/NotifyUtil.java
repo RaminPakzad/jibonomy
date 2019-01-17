@@ -61,8 +61,7 @@ public class NotifyUtil {
         mBuilder.setContentIntent(pendingIntent);
         mBuilder.setSmallIcon(R.mipmap.app_icon_s);
         mBuilder.setContentTitle("توجه");
-//        mBuilder.setContentText("جیبونومی رو باز کن نگاهی به آرزوهات بکن");
-        mBuilder.setContentText("این دختره فردا میره و تو با هزار تا آرزو میمونی");
+        mBuilder.setContentText("جیبونومی رو باز کن نگاهی به آرزوهات بکن");
         mBuilder.setPriority(Notification.PRIORITY_MAX);
         mBuilder.setStyle(bigText);
 

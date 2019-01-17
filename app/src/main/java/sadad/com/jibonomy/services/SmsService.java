@@ -19,7 +19,7 @@ public class SmsService {
     public static smsDto decodeSms(String test) {
         Pattern amountPattern=Pattern.compile("(?miu)(?<title>\\s*)(?<amount>-?\\+?[1-9]{1}[0-9]{0,2}(,?\\d{3})*)");
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            amountPattern = Pattern.compile("(?miu)(?<title>\\s*)(?<amount>-?\\+?[1-9]{1}[0-9]{0,2}(,?\\d{3})*)", Pattern.UNICODE_CHARACTER_CLASS);
+            amountPattern = Pattern.compile("(?miu)(?<title>\\s*)(?<amount>-?\\+?[1-9]{1}[0-9]{0,2}(,?\\d{3})*)");
         }
         final Pattern datePattern = Pattern.compile("(?miu)(?<date>\\d{4}-\\d2:\\d{2})");
 
