@@ -55,7 +55,7 @@ public class TransactionFragment extends Fragment {
         subCategoryService = new SubCategoryService(rootView.getContext());
         amount = rootView.findViewById(R.id.amount);
         dateOfTransaction = rootView.findViewById(R.id.dateOfTransaction);
-        category = rootView.findViewById(R.id.category);
+
         transactionDescription = rootView.findViewById(R.id.transactionDescription);
         selectCategory = rootView.findViewById(R.id.selectCategory);
         saveTransaction = rootView.findViewById(R.id.saveTransaction);
@@ -84,7 +84,7 @@ public class TransactionFragment extends Fragment {
             public void onClick(View view) {
                 final Dialog dialog = new Dialog(view.getContext());
                 dialog.setContentView(R.layout.select_category_dialog);
-                dialog.setTitle("Title...");
+                dialog.setTitle("Choose category");
 
                 final ExpandableListView expListView;
                 expListView = (ExpandableListView) dialog.findViewById(R.id.lvExp);
