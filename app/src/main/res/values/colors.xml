@@ -22,4 +22,6 @@
     <color name="warnYellow">#e29e00</color>
     <color name="alertRed">#c70a27</color>
     <color name="saveButton">#1bb67d</color>
+    <color name="iconBackground">#e9eaf5</color>
+    <color name="approve">#6ae6b8</color>
 </resources>

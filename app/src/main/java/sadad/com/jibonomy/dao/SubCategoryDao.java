@@ -23,6 +23,9 @@ public interface SubCategoryDao {
     @Query("SELECT * from SubCategory where categoryId = :categoryId ORDER BY subCategoryId ASC")
     List<SubCategory> getAllByCategoryId(Long categoryId);
 
+    @Query("delete from SubCategory where categoryId = :categoryId and subCategoryName = :subCategoryName")
+    void deleteByCategoryIdAndSubCategoryName(Long categoryId, String subCategoryName);
+
     @Query("SELECT * from SubCategory ORDER BY subCategoryId ASC")
     List<SubCategory> getAll();
 

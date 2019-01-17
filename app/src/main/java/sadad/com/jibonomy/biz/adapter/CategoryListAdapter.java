@@ -1,5 +1,6 @@
 package sadad.com.jibonomy.biz.adapter;
 
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,9 +13,12 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import sadad.com.jibonomy.R;
+import sadad.com.jibonomy.WishFragment;
 import sadad.com.jibonomy.entities.Category;
+import sadad.com.jibonomy.entities.Wish;
+import sadad.com.jibonomy.fragments.CategoryFragment;
 import sadad.com.jibonomy.services.CategoryService;
-import sadad.com.jibonomy.services.WishService;
+import sadad.com.jibonomy.utils.NavigationUtil;
 
 /**
  * @author ramin pakzad (RPakzadmanesh@gmail.com) on 1/17/2019.
@@ -39,15 +43,21 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     @Override
     public void onBindViewHolder(CategoryListAdapter.MyViewHolder holder, int position) {
-        Category category = categories.get(position);
+        final Category category = categories.get(position);
         DecimalFormat df = new DecimalFormat("#,###");
-        holder.budget.setText(df.format(category.getBudget()) + " بودجه ماهانه ");
+        holder.budget.setText("بودجه ماهانه:" + df.format(category.getBudget()));
         holder.categoryName.setText(category.getCategoryName());
         int id = itemView.getContext().getResources().getIdentifier("sadad.com.jibonomy:drawable/" + category.getIconName(), null, null);
         holder.categoryImage.setImageResource(id);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CategoryFragment fragment = new CategoryFragment();
+                Bundle args = new Bundle();
+                args.putLong(Category.CATEGORY_ID_LABEL, category.getCategoryId());
+                fragment.setArguments(args);
+                NavigationUtil.changeFragment(fragment, itemView);
+
                 Toast.makeText(itemView.getContext(), "edit category", Toast.LENGTH_LONG).show();
             }
         });

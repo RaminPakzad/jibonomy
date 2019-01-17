@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 
 @Entity(tableName = "Category")
 public class Category {
+        public static final String CATEGORY_ID_LABEL= "CATEGORYID";
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "categoryId")
     private Long categoryId;

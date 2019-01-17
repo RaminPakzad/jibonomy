@@ -17,6 +17,7 @@ import sadad.com.jibonomy.R;
 import sadad.com.jibonomy.biz.adapter.CategoryListAdapter;
 import sadad.com.jibonomy.entities.Category;
 import sadad.com.jibonomy.services.CategoryService;
+import sadad.com.jibonomy.utils.NavigationUtil;
 
 /**
  * @author ramin pakzad (RPakzadmanesh@gmail.com) on 1/17/2019.
@@ -40,7 +41,7 @@ public class CategoryListFragment extends Fragment {
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                NavigationUtil.changeFragment(new CategoryFragment(),rootView);
+                NavigationUtil.changeFragment(new CategoryFragment(), rootView);
             }
         });
 

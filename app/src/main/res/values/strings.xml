@@ -42,5 +42,11 @@
     <string name="selectCategory">انتخاب نوع تراکنش</string>
     <string name="pickDate">انتخاب تاریخ</string>
     <string name="pickTime">انتخاب ساعت</string>
+    <string name="categoryName">نام طبقه بندی</string>
+    <string name="monthlyBudget">بودجه ماهانه</string>
+    <string name="addSubCategory">اضافه کردن زیر گروه</string>
+    <string name="chooseIcon">انتخاب آیکون</string>
+    <string name="subCategoryCaption">عنوان زیر گروه</string>
+    <string name="approve">تایید</string>
 
 </resources>
