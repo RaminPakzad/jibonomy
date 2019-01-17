@@ -18,10 +18,9 @@ public interface TransactionDao {
     @Query("DELETE FROM Transactions")
     void deleteAll();
 
-    @Query("SELECT * from Transactions ORDER BY transactionId ASC")
-    List<Transaction> getAllTransactiones();
 
-    @Query("SELECT * from Transactions ORDER BY transactionId ASC")
+
+    @Query("SELECT * from Transactions ORDER BY transactionDate DESC")
     List<Transaction> getAll();
 
     @Query("SELECT * from Transactions where  transactionId = :transactionId ")

@@ -7,23 +7,37 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.synnapps.carouselview.CarouselView;
 import com.synnapps.carouselview.ImageListener;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sadad.com.jibonomy.biz.dto.Post;
 import sadad.com.jibonomy.biz.dto.UserDto;
+import sadad.com.jibonomy.services.APIService;
+import sadad.com.jibonomy.services.ApiUtils;
 import sadad.com.jibonomy.services.UserService;
 import sadad.com.jibonomy.utils.NotifyUtil;
 
 public class LoginActivity extends AppCompatActivity {
 
     LoginActivity loginActivity;
-    Button loginButton, ssoLoginButton;
+    Button loginButton, ssoLoginButton, postCall;
     CarouselView carouselView;
-    int[] sampleImages = {R.drawable.into_slider_04,R.drawable.into_slider_01,R.drawable.into_slider_02,R.drawable.into_slider_03};
-
+    int[] sampleImages = {R.drawable.into_slider_04, R.drawable.into_slider_01, R.drawable.into_slider_02, R.drawable.into_slider_03};
+    EditText responsePost;
     UserService userService;
+    ImageListener imageListener = new ImageListener() {
+        @Override
+        public void setImageForPosition(int position, ImageView imageView) {
+            imageView.setImageResource(sampleImages[position]);
+        }
+    };
+    private APIService mAPIService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +45,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         loginActivity = this;
         userService = new UserService(getBaseContext());
-
+        mAPIService = ApiUtils.getAPIService();
         carouselView = (CarouselView) findViewById(R.id.carouselView);
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
         loginButton = findViewById(R.id.login_button);
+        responsePost = findViewById(R.id.responsePost);
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,10 +61,10 @@ public class LoginActivity extends AppCompatActivity {
                 editor.putString("firstName", user.getFirstName());
                 editor.putString("lastName", user.getLastName());
                 editor.putString("email", user.getEmail());
-                editor.putLong("appBalance", 500000 );
+                editor.putLong("appBalance", 500000);
                 editor.apply();
                 Intent intent = new Intent(loginActivity, MainActivity.class);
-                loginActivity.startActivity( intent );
+                loginActivity.startActivity(intent);
             }
         });
 
@@ -61,17 +77,37 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(browserIntent);
             }
         });
-
+        postCall = findViewById(R.id.testPost);
+        postCall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sendPost("asdf", "asdf");
+            }
+        });
         // Sample notification view
         NotifyUtil.viewNotify(getApplicationContext());
 
     }
 
-    ImageListener imageListener = new ImageListener() {
-        @Override
-        public void setImageForPosition(int position, ImageView imageView) {
-            imageView.setImageResource(sampleImages[position]);
-        }
-    };
+    public void sendPost(String title, String body) {
+        mAPIService.savePost(title, body, 1).enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
 
+                if (response.isSuccessful()) {
+                    showResponse(response.body().toString());
+//                    Log.i(TAG, "post submitted to API." + response.body().toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
+//                Log.e(TAG, "Unable to submit post to API.");
+            }
+        });
+    }
+
+    public void showResponse(String response) {
+        responsePost.setText(response);
+    }
 }
