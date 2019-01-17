@@ -14,6 +14,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -96,6 +97,21 @@ public class TransactionFragment extends Fragment {
                             expListView.collapseGroup(lastExpandedPosition);
                         }
                         lastExpandedPosition = groupPosition;
+                    }
+                });
+                expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+                    @Override
+                    public boolean onChildClick(ExpandableListView expandableListView, View view, int groupPosition, int childPosition, long l) {
+                        String categoryName = categoryList.get(groupPosition).getCategoryName();
+                        String subCategoryName = subCategoryMap.get(
+                                categoryList.get(groupPosition).getCategoryId()).get(
+                                childPosition).getSubCategoryName();
+                        Toast.makeText(
+                                view.getContext(), categoryName + " : " + subCategoryName, Toast.LENGTH_SHORT).show();
+                        String text = categoryName + "/" + subCategoryName;
+                        selectCategory.setText(text);
+                        dialog.hide();
+                        return false;
                     }
                 });
                 prepareListData();

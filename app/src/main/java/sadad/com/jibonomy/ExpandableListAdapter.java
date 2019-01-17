@@ -33,8 +33,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosititon) {
-        SubCategory subCategory = this.subCategories.get(this.categories.get(groupPosition).getCategoryId()).get(childPosititon);
+    public Object getChild(int groupPosition, int childPosition) {
+        SubCategory subCategory = this.subCategories.get(this.categories.get(groupPosition).getCategoryId()).get(childPosition);
         return subCategory;
     }
 
@@ -57,6 +57,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListItem);
 
         txtListChild.setText(childText.getSubCategoryName());
+        txtListChild.setTag(childText.getSubCategoryId());
         return convertView;
     }
 
