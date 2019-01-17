@@ -38,9 +38,9 @@ public class TransactionGlimpseAdapter extends RecyclerView.Adapter<TransactionG
     public void onBindViewHolder(TransactionGlimpseAdapter.MyViewHolder holder, int position) {
         Transaction transaction = transactionList.get(position);
         DecimalFormat df = new DecimalFormat("#,###");
-        holder.amountOfTransaction.setText(df.format(transaction.getAmount()));
+        holder.amountOfTransaction.setText(df.format(transaction.getAmount()) + " ریال " );
         holder.dateOfTransaction.setText("1397/01/02 14:22");
-        holder.categoryImage.setImageResource(context.getResources().getIdentifier("store", "drawable", context.getPackageName()));
+        holder.categoryImage.setImageResource(context.getResources().getIdentifier("ic_store_grey600_24dp", "drawable", context.getPackageName()));
 
     }
 

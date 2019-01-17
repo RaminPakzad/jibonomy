@@ -6,6 +6,7 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import sadad.com.jibonomy.biz.dto.ChartDataDto;
 import sadad.com.jibonomy.entities.Transaction;
 
 
@@ -28,4 +29,10 @@ public interface TransactionDao {
 
     @Query("delete from Transactions where  transactionId = :transactionId")
     void delete(Long transactionId);
+
+    @Query("select SubCategory.categoryId as lable ,SUM(Transactions.amount) as totalAmount  from Transactions left join SubCategory on Transactions.subCategoryType =  SubCategory.categoryId group by SubCategory.categoryId")
+    List<ChartDataDto> sumAmountByCategoryGroup();
+
+
+
 }

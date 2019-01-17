@@ -22,8 +22,6 @@
 
         <activity android:name=".SettingFragment" />
 
-
-
         <receiver android:name=".BudgetInfoWidget">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity"
     android:background="@color/primaryBlue"
-    android:paddingTop="100dp">
+    android:paddingTop="80dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,11 +18,11 @@
             android:id="@+id/carouselView"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            app:fillColor="#FFFFFFFF"
+            app:fillColor="@color/white"
             app:pageColor="#00000000"
             app:radius="4dp"
             app:slideInterval="6000"
-            app:strokeColor="#FFFFFFFF"
+            app:strokeColor="@color/white"
             app:indicatorMarginVertical="10dp"
             app:strokeWidth="1dp"/>
 
