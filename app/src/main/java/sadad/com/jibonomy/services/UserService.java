@@ -3,6 +3,7 @@ package sadad.com.jibonomy.services;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,7 +24,7 @@ public class UserService {
     }
 
     public long getUserDailyBudget(){
-        SharedPreferences prefs = context.getSharedPreferences("user", context.MODE_PRIVATE);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getLong("dailyBudget", 20000);
     }
 
