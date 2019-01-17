@@ -9,7 +9,7 @@
         android:id="@+id/transactionType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/margin_side"
         android:background="@color/transparent"
         android:src="@android:drawable/arrow_up_float" />
@@ -17,19 +17,25 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="false"
+        android:layout_toLeftOf="@+id/categoryImage"
+        android:paddingRight="5dp"
         android:orientation="vertical">
         <TextView
             android:id="@+id/amountOfTransaction"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:gravity="right"
+            android:text="@string/home"
             android:textSize="@dimen/small_text_size" />
         <TextView
             android:id="@+id/dateOfTransaction"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_sans_web_fa_num"
             android:textColor="@color/highlightText"
+            android:text="@string/home"
+            android:gravity="right"
             android:textSize="@dimen/tiny_text_size" />
     </LinearLayout>
 
@@ -38,10 +44,10 @@
         android:id="@+id/categoryImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_margin="@dimen/margin_side"
         android:background="@color/transparent"
-        android:src="@drawable/question" />
+        android:src="@drawable/ic_store_grey600_24dp" />
 
 
 </RelativeLayout>

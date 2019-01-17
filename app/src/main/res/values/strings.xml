@@ -9,6 +9,7 @@
     <string name="title_activity_wish_list">WishListActivity</string>
 
 
+    <string name="rial">ریال</string>
     <string name="firstMonth">فروردین</string>
     <string name="wish_list">لیست آرزوها</string>
     <string name="transaction_list">لیست تراکنش ها</string>

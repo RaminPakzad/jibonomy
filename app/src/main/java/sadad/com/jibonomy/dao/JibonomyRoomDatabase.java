@@ -9,7 +9,9 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import sadad.com.jibonomy.entities.Category;
@@ -127,6 +129,21 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
                 asyncSubCategoryDao.insert(subCategory2);
                 asyncSubCategoryDao.insert(subCategory3);
                 asyncSubCategoryDao.insert(subCategory4);
+            }
+
+            List<SubCategory> subcat = asyncSubCategoryDao.getAll();
+            for( int i= 0 ; i < 20 ; i ++){
+                Transaction transaction = new Transaction();
+                Byte[] type = {(byte) 1, (byte) 2};
+                SubCategory s = subcat.get( (int) (Math.random() * subcat.size())  );
+                transaction.setAmount( new BigDecimal( Math.floor(Math.random()*100) * 1000) );
+                transaction.setDescription("Some Description");
+                transaction.setSubCategoryType( s.getSubCategoryId() );
+                transaction.setTransactionType( type[(int)Math.round(Math.random())] );
+                transaction.setTransactionTime("2000");
+                transaction.setTransactionDate((long) 13971101);
+                Log.d("Transactions", transaction.toString() );
+                asyncTransactionDao.insert(transaction);
             }
 
             return null;

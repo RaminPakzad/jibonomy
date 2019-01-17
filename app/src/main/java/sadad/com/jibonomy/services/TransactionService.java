@@ -1,11 +1,18 @@
 package sadad.com.jibonomy.services;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.github.mikephil.charting.data.PieEntry;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import sadad.com.jibonomy.biz.dto.ChartDataDto;
 import sadad.com.jibonomy.dao.JibonomyRoomDatabase;
 import sadad.com.jibonomy.dao.TransactionDao;
+import sadad.com.jibonomy.entities.Category;
 import sadad.com.jibonomy.entities.Transaction;
 
 /**
@@ -38,6 +45,18 @@ public class TransactionService {
 
     public void deleteAll() {
         transactionDao.deleteAll();
+    }
+
+    public List<PieEntry> getChartData(){
+        List<PieEntry> chart = new ArrayList<>();
+        List<ChartDataDto> res = transactionDao.sumAmountByCategoryGroup();
+        for (ChartDataDto item:res){
+            Log.d("getChartData", "dd" );
+            if( item.getLable() != null){
+                chart.add( new PieEntry(item.getTotalAmount(),item.getLable() ));
+            }
+        }
+        return chart;
     }
 
 }
