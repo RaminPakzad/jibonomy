@@ -3,14 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
-
+    
     <RelativeLayout
         android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageButton
+            android:id="@+id/pre_month"
+            android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -24,17 +25,29 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="false"
+            android:layout_marginTop="15dp"
             android:fontFamily="@font/iran_sans_web_fa_num"
             android:text="@string/firstMonth"
             android:textSize="20sp" />
 
         <ImageButton
+            android:id="@+id/next_month"
+            android:padding="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_margin="@dimen/margin_side"
             android:background="@color/transparent"
             android:src="@drawable/ic_arrow_right_grey600_24dp" />
+
+        <View
+            android:id="@+id/center_view_data"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignTop="@+id/overallExpenseChart"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:background="#20000000" />
 
 
         <com.github.mikephil.charting.charts.PieChart

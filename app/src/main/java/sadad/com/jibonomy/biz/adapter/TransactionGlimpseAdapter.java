@@ -14,17 +14,21 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import sadad.com.jibonomy.R;
+import sadad.com.jibonomy.dao.CategoryDao;
+import sadad.com.jibonomy.entities.Category;
 import sadad.com.jibonomy.entities.Transaction;
+import sadad.com.jibonomy.services.CategoryService;
 
 public class TransactionGlimpseAdapter extends RecyclerView.Adapter<TransactionGlimpseAdapter.MyViewHolder> {
 
     private List<Transaction> transactionList;
     private Context context;
+    private CategoryService categoryService;
 
     public TransactionGlimpseAdapter(List<Transaction> transactionList, Context context) {
         this.transactionList = transactionList;
         this.context = context;
-
+        categoryService = new CategoryService(context);
     }
 
     @Override
@@ -37,10 +41,19 @@ public class TransactionGlimpseAdapter extends RecyclerView.Adapter<TransactionG
     @Override
     public void onBindViewHolder(TransactionGlimpseAdapter.MyViewHolder holder, int position) {
         Transaction transaction = transactionList.get(position);
+        Category c = categoryService.get(transaction.getSubCategoryType());
         DecimalFormat df = new DecimalFormat("#,###");
         holder.amountOfTransaction.setText(df.format(transaction.getAmount()) + " ریال " );
         holder.dateOfTransaction.setText("1397/01/02 14:22");
-        holder.categoryImage.setImageResource(context.getResources().getIdentifier("ic_store_grey600_24dp", "drawable", context.getPackageName()));
+
+        holder.transactionType.setImageResource(context.getResources().getIdentifier((transaction.getTransactionType()== (byte) 1 ? "ic_arrow_up_circle_outline_grey600_24dp" : "ic_arrow_down_circle_outline_grey600_24dp" ) , "drawable", context.getPackageName()));
+        if( c == null ){
+            holder.relativeLayout.setBackground(context.getDrawable(R.color.tooLightGray));
+            holder.categoryImage.setImageResource(context.getResources().getIdentifier("ic_help_circle_outline_grey600_24dp", "drawable", context.getPackageName()));
+        } else {
+            holder.categoryImage.setImageResource(context.getResources().getIdentifier(c.getIconName(), "drawable", context.getPackageName()));
+        }
+
 
     }
 

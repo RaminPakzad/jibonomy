@@ -91,16 +91,37 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
 
             Category category = new Category();
             category.setCategoryId(1L);
-            category.setCategoryName("cat1");
-            category.setIconName("home");
+            category.setCategoryName("خوراک");
+            category.setIconName("ic_food_grey600_24dp");
 
             Category category1 = new Category();
-            category.setCategoryId(2L);
-            category1.setCategoryName("cat2");
-            category1.setIconName("taxi");
+            category1.setCategoryId(2L);
+            category1.setCategoryName("پوشاک");
+            category1.setIconName("ic_tshirt_crew_grey600_24dp");
+
+
+            Category category2 = new Category();
+            category2.setCategoryId(3L);
+            category2.setCategoryName("حمل و نقل");
+            category2.setIconName("ic_train_car_grey600_24dp");
+
+
+            Category category3 = new Category();
+            category3.setCategoryId(4L);
+            category3.setCategoryName("فرهنگی");
+            category3.setIconName("ic_theater_grey600_24dp");
+
+
+            Category category4 = new Category();
+            category4.setCategoryId(5L);
+            category4.setCategoryName("درمانی");
+            category4.setIconName("ic_hospital_building_grey600_24dp");
+
 
             asyncCategoryDao.insert(category);
             asyncCategoryDao.insert(category1);
+            asyncCategoryDao.insert(category2);
+            asyncCategoryDao.insert(category3);
 //////////////////////////
             SubCategory subCategory1 = new SubCategory();
             subCategory1.setSubCategoryName("sub2");

@@ -40,4 +40,9 @@ public class CategoryService {
         categoryDao.deleteAll();
     }
 
+
+    public Category get( long id ) {
+        return categoryDao.get(id);
+    }
+
 }

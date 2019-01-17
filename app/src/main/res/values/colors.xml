@@ -14,6 +14,8 @@
     <color name="darkFont">#02093e</color>
     <color name="lightFont">#031cd9</color>
     <color name="black">#000420</color>
+    <color name="lightGray">#29000420</color>
+    <color name="tooLightGray">#0a000420</color>
 
 
     <color name="happyGreen">#4b9b2e</color>

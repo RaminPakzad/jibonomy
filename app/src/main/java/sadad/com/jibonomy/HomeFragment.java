@@ -11,6 +11,8 @@ import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.Chart;
@@ -25,6 +27,8 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
+
+import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -47,23 +51,46 @@ public class HomeFragment extends Fragment {
     private RecyclerView transactionGlimpseList;
     private TransactionGlimpseAdapter transactionGlimpseAdapter;
     private TransactionService transactionService;
+    private TextView monthNameText;
+    private View centerView;
 
+    private String[] jaliliMonthList = {"","فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"};
+    private int currentPosition = 1;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.home_fragment, container, false);
+
         transactionGlimpseList = rootView.findViewById(R.id.transactionGlimpseList);
+
         chart = rootView.findViewById(R.id.overallExpenseChart);
+
         List<Transaction> transactions = new ArrayList<>();
         transactionService = new TransactionService(getContext());
-/*
-        transactions.add(new Transaction(1l, new Date(), "test", (byte) 1, new BigDecimal(12000)));
-        transactions.add(new Transaction(2l, new Date(), "test", (byte) 1, new BigDecimal(1000)));
-        transactions.add(new Transaction(3l, new Date(), "test", (byte) 1, new BigDecimal(5000)));
-        transactions.add(new Transaction(4l, new Date(), "test", (byte) 1, new BigDecimal(2000)));
-        transactions.add(new Transaction(5l, new Date(), "test", (byte) 1, new BigDecimal(78000)));
-*/
+
+        // month controller
+        monthNameText = (TextView) rootView.findViewById(R.id.monthName);
+        ImageButton next = (ImageButton) rootView.findViewById(R.id.next_month);
+        ImageButton pre = (ImageButton) rootView.findViewById(R.id.pre_month);
+        centerView = (View) rootView.findViewById(R.id.center_view_data);
+        centerView.bringToFront();
+
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nextMonth();
+            }
+        });
+
+        pre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                preMonth();
+            }
+        });
+
+
         transactions = transactionService.getTransactiones();
         transactionGlimpseAdapter = new TransactionGlimpseAdapter(transactions, rootView.getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(rootView.getContext());
@@ -84,21 +111,21 @@ public class HomeFragment extends Fragment {
         chart.setDragDecelerationFrictionCoef(0.95f);
 
 //        chart.setCenterTextTypeface(tfLight);
-        chart.setCenterText(generateCenterSpannableText());
+        //chart.setCenterText(generateCenterSpannableText());
 
         //chart.setDrawHoleEnabled(true);
         //chart.setHoleColor(Color.WHITE);
 
-        chart.setTransparentCircleColor(Color.WHITE);
-        chart.setTransparentCircleAlpha(110);
+        //chart.setTransparentCircleColor(Color.WHITE);
+        //chart.setTransparentCircleAlpha(110);
 
         chart.setHoleRadius(58f);
         chart.setTransparentCircleRadius(61f);
 
-        chart.setDrawCenterText(true);
+        //chart.setDrawCenterText(true);
 
         chart.setRotationAngle(0);
-        chart.setRotationEnabled(true);
+        //chart.setRotationEnabled(true);
         chart.setHighlightPerTapEnabled(true);
         chart.setDrawEntryLabels(false);
 
@@ -162,5 +189,23 @@ public class HomeFragment extends Fragment {
         chart.setData(data);
         chart.highlightValues(null);
         chart.invalidate();
+    }
+
+    public void nextMonth(){
+        if(currentPosition==12){
+            currentPosition = 1;
+        } else {
+            currentPosition++;
+        }
+        monthNameText.setText(jaliliMonthList[currentPosition]);
+    }
+
+    public void preMonth(){
+        if(currentPosition==1){
+            currentPosition = 12;
+        } else {
+            currentPosition--;
+        }
+        monthNameText.setText(jaliliMonthList[currentPosition]);
     }
 }
