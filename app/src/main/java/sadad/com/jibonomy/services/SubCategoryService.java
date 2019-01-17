@@ -45,5 +45,7 @@ public class SubCategoryService {
         return subCategoryDao.getAllByCategoryId(categoryId);
     }
 
-
+    public void deleteByCategoryIdAndSubCategoryName(Long categoryId, String subCategoryName) {
+        subCategoryDao.deleteByCategoryIdAndSubCategoryName(categoryId, subCategoryName);
+    }
 }

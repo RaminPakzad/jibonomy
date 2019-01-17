@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 
 @Entity(tableName = "Wish")
 public class Wish {
-    public static final String WISH_ID_LABEL = "WISHID";
+        public static final String WISH_ID_LABEL = "WISHID";
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "wishId")
     private Long wishId;

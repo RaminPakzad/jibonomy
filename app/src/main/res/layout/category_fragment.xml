@@ -8,72 +8,79 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/wishTitle"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/iran_sans_web_fa_num"
-            android:hint="@string/wishTitle"
-            android:inputType="text"
-            android:textColor="@color/darkFont"
-            android:textColorHint="@color/lightFont" />
-        </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/neededBudget"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/iran_sans_web_fa_num"
-            android:hint="@string/neededBudget"
-            android:inputType="number"
-            android:textColor="@color/darkFont"
-            android:textColorHint="@color/lightFont" />
+
+            <EditText
+                android:id="@+id/categoryName"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/iran_sans_web_fa_num"
+                android:hint="@string/categoryName"
+                android:inputType="text"
+                android:textColor="@color/darkFont"
+                android:textColorHint="@color/lightFont" />
         </android.support.design.widget.TextInputLayout>
+
+
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/wishDescription"
+
+            <EditText
+                android:id="@+id/budget"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/iran_sans_web_fa_num"
+                android:hint="@string/monthlyBudget"
+                android:inputType="text"
+                android:textColor="@color/darkFont"
+                android:textColorHint="@color/lightFont" />
+        </android.support.design.widget.TextInputLayout>
+        <!--<Button
+            android:id="@+id/chooseIcon"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/iran_sans_web_fa_num"
-            android:hint="@string/wishDescription"
-            android:inputType="text"
-            android:textColor="@color/darkFont"
-            android:textColorHint="@color/lightFont" />
-        </android.support.design.widget.TextInputLayout>
+            android:text="@string/chooseIcon" />
+-->
+        <!--   <ImageView
+               android:id="@+id/categoryIcon"
+               android:layout_gravity="center"
+               android:layout_width="wrap_content"
+               android:layout_height="100dp" />-->
+
+
         <Button
-            android:id="@+id/choosePic"
+            android:id="@+id/addSubCategory"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/iran_sans_web_fa_num"
-            android:text="@string/choosePic" />
+            android:text="@string/addSubCategory" />
 
-        <ImageView
-            android:id="@+id/wishImage"
+        <ListView
+            android:id="@+id/subCategories"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
+            android:layout_height="200dp"
             android:layout_gravity="center" />
-
     </LinearLayout>
 
     <Button
-        android:id="@+id/saveWish"
+        android:id="@+id/saveCategory"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@color/saveButton"
         android:fontFamily="@font/iran_sans_web_fa_num"
         android:text="@string/save"
+
         android:textSize="@dimen/medium_text_size" />
+
+
 </RelativeLayout>
