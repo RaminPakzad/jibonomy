@@ -4,6 +4,8 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import java.math.BigDecimal;
+
 @Entity(tableName = "Category")
 public class Category {
     @PrimaryKey(autoGenerate = true)
@@ -15,6 +17,17 @@ public class Category {
 
     @ColumnInfo(name = "iconName")
     private String iconName;
+
+    @ColumnInfo(name = "budget")
+    private BigDecimal budget;
+
+    public BigDecimal getBudget() {
+        return budget;
+    }
+
+    public void setBudget(BigDecimal budget) {
+        this.budget = budget;
+    }
 
     public Long getCategoryId() {
         return categoryId;

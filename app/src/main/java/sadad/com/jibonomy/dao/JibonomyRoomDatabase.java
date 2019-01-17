@@ -19,7 +19,7 @@ import sadad.com.jibonomy.entities.SubCategory;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.entities.Wish;
 
-@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 5, exportSchema = false)
+@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 6, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class JibonomyRoomDatabase extends RoomDatabase {
 
@@ -92,16 +92,21 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
             Category category = new Category();
             category.setCategoryId(1L);
             category.setCategoryName("خوراک");
+            category.setBudget(new BigDecimal(22222));
             category.setIconName("ic_food_grey600_24dp");
 
             Category category1 = new Category();
             category1.setCategoryId(2L);
+            category1.setBudget(new BigDecimal(22222));
+
             category1.setCategoryName("پوشاک");
             category1.setIconName("ic_tshirt_crew_grey600_24dp");
 
 
             Category category2 = new Category();
             category2.setCategoryId(3L);
+            category2.setBudget(new BigDecimal(22222));
+
             category2.setCategoryName("حمل و نقل");
             category2.setIconName("ic_train_car_grey600_24dp");
 
@@ -109,11 +114,15 @@ public abstract class JibonomyRoomDatabase extends RoomDatabase {
             Category category3 = new Category();
             category3.setCategoryId(4L);
             category3.setCategoryName("فرهنگی");
+            category3.setBudget(new BigDecimal(22222));
+
             category3.setIconName("ic_theater_grey600_24dp");
 
 
             Category category4 = new Category();
             category4.setCategoryId(5L);
+            category4.setBudget(new BigDecimal(22222));
+
             category4.setCategoryName("درمانی");
             category4.setIconName("ic_hospital_building_grey600_24dp");
 
