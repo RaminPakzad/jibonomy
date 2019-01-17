@@ -27,12 +27,14 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import sadad.com.jibonomy.fragments.CategoryListFragment;
 import sadad.com.jibonomy.fragments.TransactionFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener,
         OnChartValueSelectedListener {
     private int MY_PERMISSIONS_REQUEST_SMS_RECEIVE = 10;
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -78,16 +80,20 @@ public class MainActivity extends AppCompatActivity
                 FragmentTransaction fragmentTransaction;
                 switch (item.getItemId()) {
                     case R.id.add_transaction:
-                       toolbar.setTitle("AddTransaciton");
-                       loadFragment(new TransactionFragment());
+                        toolbar.setTitle("AddTransaciton");
+                        loadFragment(new TransactionFragment());
                         break;
                     case R.id.wish_list:
-                       toolbar.setTitle("Wishes");
-                       loadFragment(new WishListFragment());
+                        toolbar.setTitle("Wishes");
+                        loadFragment(new WishListFragment());
                         break;
                     case R.id.home:
                         toolbar.setTitle("Home");
                         loadFragment(new HomeFragment());
+                        break;
+                    case R.id.category:
+                        toolbar.setTitle("Category");
+                        loadFragment(new CategoryListFragment());
                         break;
                 }
 
@@ -103,8 +109,8 @@ public class MainActivity extends AppCompatActivity
         View headerView = navigationView.getHeaderView(0);
         TextView fullName = (TextView) headerView.findViewById(R.id.user_full_name);
         TextView email = (TextView) headerView.findViewById(R.id.user_email);
-        fullName.setText(prefs.getString("firstName","") + " " + prefs.getString("lastName",""));
-        email.setText(prefs.getString("email",""));
+        fullName.setText(prefs.getString("firstName", "") + " " + prefs.getString("lastName", ""));
+        email.setText(prefs.getString("email", ""));
 
         // Main action menu click handler
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -113,19 +119,19 @@ public class MainActivity extends AppCompatActivity
                 item.setChecked(true);
                 switch (item.getItemId()) {
                     case R.id.main_nav_home:
-                        Log.d("Item Clicked","main_nav_wish_list");
+                        Log.d("Item Clicked", "main_nav_wish_list");
                         break;
                     case R.id.main_nav_wish_list:
-                        Log.d("Item Clicked","main_nav_wish_list");
+                        Log.d("Item Clicked", "main_nav_wish_list");
                         break;
                     case R.id.main_nav_transaction_list:
-                        Log.d("Item Clicked","main_nav_transaction_list");
+                        Log.d("Item Clicked", "main_nav_transaction_list");
                         break;
                     case R.id.main_nav_report:
-                        Log.d("Item Clicked","main_nav_report");
+                        Log.d("Item Clicked", "main_nav_report");
                         break;
                     case R.id.main_nav_setting:
-                        Log.d("Item Clicked","main_nav_setting");
+                        Log.d("Item Clicked", "main_nav_setting");
                         Intent i = new Intent(getBaseContext(), SettingFragment.class);
                         startActivity(i);
                         break;
