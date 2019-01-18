@@ -3,6 +3,7 @@ package sadad.com.jibonomy.services;
 import android.content.Context;
 import android.util.Log;
 
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieEntry;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
@@ -126,6 +127,19 @@ public class TransactionService {
             for (ChartDataDto item : res) {
                 if (item.getLable() != null) {
                     chart.add(new PieEntry(item.getTotalAmount(), item.getLable()));
+                }
+            }
+        }
+        return chart;
+    }public List<BarEntry> getBarChartData(int month, boolean mock) {
+        List<BarEntry> chart = new ArrayList<>();
+        if (mock == true) {
+        } else {
+            String m = (month < 10 ? "0" + month : "" + month);
+            List<ChartDataDto> res = transactionDao.sumAmountByCategoryGroupWithMonth(m);
+            for (ChartDataDto item : res) {
+                if (item.getLable() != null) {
+                    chart.add(new BarEntry(item.getTotalAmount(), item.getTotalAmount()));
                 }
             }
         }

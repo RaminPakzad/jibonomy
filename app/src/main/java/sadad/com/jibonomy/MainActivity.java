@@ -99,9 +99,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 item.setChecked(true);
-                Fragment fragment;
-                FragmentManager fragmentManager;
-                FragmentTransaction fragmentTransaction;
                 switch (item.getItemId()) {
                     case R.id.add_transaction:
                         toolbar.setTitle("تراکنش");
@@ -118,6 +115,10 @@ public class MainActivity extends AppCompatActivity
                     case R.id.category:
                         toolbar.setTitle("طبقه بندی");
                         loadFragment(new CategoryListFragment());
+                        break;
+                        case R.id.dashboard:
+                        toolbar.setTitle("گزارشات");
+                        loadFragment(new DashboardFragment());
                         break;
                 }
                 return false;
@@ -152,13 +153,13 @@ public class MainActivity extends AppCompatActivity
                         Log.d("Item Clicked", "main_nav_wish_list");
                         break;
                     case R.id.main_nav_transaction_list:
-                        toolbar.setTitle("لیست تراکنش");
+                        toolbar.setTitle("لیست تراکنش ها");
                         loadFragment(new AllTransactionsFragment());
                         Log.d("Item Clicked", "main_nav_transaction_list");
                         break;
                     case R.id.main_nav_report:
                         toolbar.setTitle("گزارشات");
-                        loadFragment(new TransactionFragment());
+                        loadFragment(new DashboardFragment());
                         Log.d("Item Clicked", "main_nav_report");
                         break;
                     case R.id.main_nav_setting:
@@ -183,6 +184,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container_body, fragment, "HomeFragment");
+        toolbar.setTitle("خانه");
         fragmentTransaction.commit();
 
 
