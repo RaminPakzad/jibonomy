@@ -47,7 +47,7 @@ public class NotifyUtil {
         notificationManager.notify(0, mBuilder.build());
     }
 
-    public static void sendNotification(Context mContext) {
+    public static void sendNotification(Context mContext,String title,String contentText) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(mContext.getApplicationContext(), "notify_001");
         Intent ii = new Intent(mContext.getApplicationContext(), MainActivity.class);

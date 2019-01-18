@@ -42,13 +42,15 @@ public class TransactionService {
     }
 
     public void insert(Transaction transaction) {
-        if (transaction.getDescription().equals("SMS")) {
-            NotifyUtil.sendNotification(context);
-        }
-        if (isExist(transaction)) {
+        if (/*isSMS && */isExist(transaction)) {
             Log.i("jibonomy", "duplicated transaction");
             return;
         }
+        boolean isSMS = transaction.getTag() != null && transaction.getTag().equals("SMS");
+        if (isSMS) {
+            NotifyUtil.sendNotification(context,"پیام بانکی جدید","برای تعیین تراکنش لمس کنید");
+        }
+
         expenseExceedNotify(transaction);
         this.transactionDao.insert(transaction);
     }
@@ -76,7 +78,7 @@ public class TransactionService {
             BigDecimal sumOfExpenseTransactions = getSumOfExpenseTransactions(persianDate);
             BigDecimal sum = sumOfExpenseTransactions.add(transaction.getAmount());
             if (sum.compareTo(userService.getUserDailyBudget()) > 0) {
-                NotifyUtil.sendNotification(context);
+                NotifyUtil.sendNotification(context,"عبور از سقف بودجه تعیین شده","شما امروز بیشتر از سقف بودجه خرج کرده اید");
             }
         }
     }

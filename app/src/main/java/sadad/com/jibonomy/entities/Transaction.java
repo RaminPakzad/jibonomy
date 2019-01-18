@@ -26,6 +26,16 @@ public class Transaction {
     private Byte transactionType;
     @ColumnInfo(name = "amount")
     private BigDecimal amount;
+    @ColumnInfo(name = "tag")
+    private String tag;
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public Long getTransactionId() {
         return transactionId;

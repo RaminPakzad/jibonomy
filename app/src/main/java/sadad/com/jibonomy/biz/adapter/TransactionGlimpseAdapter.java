@@ -55,7 +55,7 @@ public class TransactionGlimpseAdapter extends RecyclerView.Adapter<TransactionG
         String dateTime = StringUtil.formatDate(transaction.getTransactionDate()) + " " + StringUtil.formatTime(transaction.getTransactionTime());
         holder.dateOfTransaction.setText(dateTime);
 
-        holder.transactionType.setImageResource(context.getResources().getIdentifier((transaction.getTransactionType() == (byte) 1 ? "ic_arrow_up_circle_outline_grey600_24dp" : "ic_arrow_down_circle_outline_grey600_24dp"), "drawable", context.getPackageName()));
+        holder.transactionType.setImageResource(context.getResources().getIdentifier((transaction.getTransactionType() == (byte) 1 ? "arrow_up" : "arrow_down"), "drawable", context.getPackageName()));
         if (c == null) {
             holder.relativeLayout.setBackground(context.getDrawable(R.color.tooLightGray));
             holder.categoryImage.setImageResource(context.getResources().getIdentifier("ic_help_circle_outline_grey600_24dp", "drawable", context.getPackageName()));

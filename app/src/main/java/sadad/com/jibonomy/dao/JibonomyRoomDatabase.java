@@ -22,7 +22,7 @@ import sadad.com.jibonomy.utils.StringUtil;
 
 import static sadad.com.jibonomy.utils.StringUtil.UNDEFINED_TAG;
 
-@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 9, exportSchema = false)
+@Database(entities = {Wish.class, Transaction.class, Category.class, SubCategory.class}, version = 10, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class JibonomyRoomDatabase extends RoomDatabase {
     private static volatile JibonomyRoomDatabase INSTANCE;

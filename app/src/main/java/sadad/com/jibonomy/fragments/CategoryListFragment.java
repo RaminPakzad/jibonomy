@@ -50,7 +50,7 @@ public class CategoryListFragment extends Fragment {
         List<Category> categoriesFromDb = categoryService.getCategories();
         List<Category> categories = new ArrayList<>();
         for (Category item : categoriesFromDb) {
-            if (item.getTag() != null && item.getTag().equals(StringUtil.UNDEFINED_TAG))
+            if (!(item.getTag() != null && item.getTag().equals(StringUtil.UNDEFINED_TAG)))
                 categories.add(item);
         }
 

@@ -151,6 +151,7 @@ public class TransactionFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Transaction transaction = new Transaction();
+                transaction.setTag("user");
                 transaction.setAmount(new BigDecimal(amount.getText().toString().replace(",", "")));
                 transaction.setSubCategoryType(selectedSubCategory);
                 transaction.setDescription(transactionDescription.getText().toString());

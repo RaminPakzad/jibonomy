@@ -83,7 +83,7 @@ public class SMSReceiver extends BroadcastReceiver {
             String amount = smsDto.getAmount().replace("+", "").replace("-", "").replace(",", "");
             transaction.setAmount(new BigDecimal(amount));
             transaction.setSubCategoryType(subCategoryService.getUndefinedSubCategory().getSubCategoryId());
-            transaction.setDescription("SMS");
+            transaction.setTag("SMS");
             PersianCalendar persianCalendar = new PersianCalendar(new Date().getTime());
             //todo get date from content
             transaction.setTransactionDate(persianCalendar.getPersianShortDate().replace("/", ""));
