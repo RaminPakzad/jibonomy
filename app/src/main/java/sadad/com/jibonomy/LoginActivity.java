@@ -20,7 +20,7 @@ import retrofit2.Response;
 import sadad.com.jibonomy.biz.dto.Post;
 import sadad.com.jibonomy.biz.dto.UserDto;
 import sadad.com.jibonomy.services.APIService;
-import sadad.com.jibonomy.services.ApiUtils;
+import sadad.com.jibonomy.utils.ApiUtils;
 import sadad.com.jibonomy.services.UserService;
 import sadad.com.jibonomy.utils.NotifyUtil;
 
@@ -32,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     int[] sampleImages = {R.drawable.into_slider_04, R.drawable.into_slider_01, R.drawable.into_slider_02, R.drawable.into_slider_03};
     EditText responsePost;
     UserService userService;
+    private String callbacl_uri = "http://192.168.25.135/jibonomy/";
+
     ImageListener imageListener = new ImageListener() {
         @Override
         public void setImageForPosition(int position, ImageView imageView) {
@@ -48,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         userService = new UserService(getBaseContext());
         mAPIService = ApiUtils.getAPIService();
 
-
         Intent intent = getIntent();
         String action = intent.getAction();
         Uri data = intent.getData();
@@ -56,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
             Log.d("DATA", "-> " + data.getQuery());
             SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
             editor.putString("token", data.getQuery());
+            editor.apply();
             Intent intentSsoLogin = new Intent(loginActivity, MainActivity.class);
             loginActivity.startActivity( intentSsoLogin );
         } else {
@@ -66,11 +68,11 @@ public class LoginActivity extends AppCompatActivity {
         carouselView.setPageCount(sampleImages.length);
         carouselView.setImageListener(imageListener);
         loginButton = findViewById(R.id.login_button);
-        responsePost = findViewById(R.id.responsePost);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 UserDto user = userService.login();
                 SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
                 editor.putString("username", user.getUsername());
@@ -89,41 +91,15 @@ public class LoginActivity extends AppCompatActivity {
         ssoLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://pfm.myoxygen.ir/auth/realms/master/protocol/openid-connect/auth?response_type=code&state=&client_id=3ccbab92-4b93-4bf4-82bb-0ccd5c88&client_secret=b5facf85-9428-4702-bf89-64c3b7a5ebad&scope=&redirect_uri=http://192.168.25.135/jibonomy/"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://pfm.myoxygen.ir/auth/realms/master/protocol/openid-connect/auth?response_type=code&state=&client_id=3ccbab92-4b93-4bf4-82bb-0ccd5c88&client_secret=b5facf85-9428-4702-bf89-64c3b7a5ebad&scope=&redirect_uri="+callbacl_uri));
                 startActivity(browserIntent);
             }
         });
-        postCall = findViewById(R.id.testPost);
-        postCall.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendPost("asdf", "asdf");
-            }
-        });
+
         // Sample notification view
-        NotifyUtil.viewNotify(getApplicationContext());
+        //NotifyUtil.viewNotify(getApplicationContext());
 
     }
 
-    public void sendPost(String title, String body) {
-        mAPIService.savePost(title, body, 1).enqueue(new Callback<Post>() {
-            @Override
-            public void onResponse(Call<Post> call, Response<Post> response) {
 
-                if (response.isSuccessful()) {
-                    showResponse(response.body().toString());
-//                    Log.i(TAG, "post submitted to API." + response.body().toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Post> call, Throwable t) {
-//                Log.e(TAG, "Unable to submit post to API.");
-            }
-        });
-    }
-
-    public void showResponse(String response) {
-        responsePost.setText(response);
-    }
 }

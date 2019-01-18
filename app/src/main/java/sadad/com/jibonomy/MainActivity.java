@@ -27,8 +27,17 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sadad.com.jibonomy.biz.dto.AccountsRequest;
+import sadad.com.jibonomy.biz.dto.Post;
+import sadad.com.jibonomy.biz.dto.Result;
 import sadad.com.jibonomy.fragments.CategoryListFragment;
 import sadad.com.jibonomy.fragments.TransactionFragment;
+import sadad.com.jibonomy.services.APIService;
+import sadad.com.jibonomy.services.RetrofitClient;
+import sadad.com.jibonomy.utils.ApiUtils;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener,
@@ -154,6 +163,8 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commit();
 
 
+
+        loadApiTransactions();
     }
 
     private void loadFragment(Fragment fragment) {
@@ -225,4 +236,33 @@ public class MainActivity extends AppCompatActivity
     public void onNothingSelected() {
 
     }
+
+
+
+    // get user transactions
+    public void loadApiTransactions(){
+        Log.d("API-CALL","INIT");
+        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+        String token = prefs.getString("token", "");
+        Log.d("API-CALL",token);
+        token = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJINGpXcmRDYl9sUHZRbmkwd3ZSOVQ2UkpMNlF2Mmt1V2NSakh4SjFrY2NRIn0.eyJqdGkiOiIyMjIwNGZlMy01ZWY0LTQ4NTEtOWNhNy1jYWI2YWFiMzgxNDkiLCJleHAiOjE1NDc3OTkwMzksIm5iZiI6MCwiaWF0IjoxNTQ3NzYzNzI0LCJpc3MiOiJodHRwOi8vcGZtLm15b3h5Z2VuLmlyL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6IjNjY2JhYjkyLTRiOTMtNGJmNC04MmJiLTBjY2Q1Yzg4Iiwic3ViIjoiNzhhNmMxMWMtNDg1MC00NjZjLTg0MTYtMzc1NWU4OTJmNjViIiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiM2NjYmFiOTItNGI5My00YmY0LTgyYmItMGNjZDVjODgiLCJhdXRoX3RpbWUiOjE1NDc3NjMwMzksInNlc3Npb25fc3RhdGUiOiI4ZTA2ODkyOS04OTFkLTRmZTktYmY1Mi01NzliMWZmNDk1ZjgiLCJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbIioiXSwicmVzb3VyY2VfYWNjZXNzIjp7IlNCQWNjb3VudFRyYW5zYWN0aW9uIjp7InJvbGVzIjpbInN2Yy1tZ210LWFjY291bnQtdHJ4Il19LCJTQkFjY291bnRCYWxhbmNlIjp7InJvbGVzIjpbInN2Yy1tZ210LWFjY291bnQtYmFsYW5jZSJdfSwiU0JDdXN0b21lckFjY291bnRJbmZvIjp7InJvbGVzIjpbInN2Yy1tZ210LWN1c3RvbWVyLWFjY291bnQiXX19LCJzc24iOiIwNDUwMDkwOTAwIn0.U1gHkM6hjrdQxgcF8WU-vE1N_uT7wIlpwWgAG2QcyuAAPjQudCuIjvdLzpikNpg9mUQJoFCbtANjHGOiugw5sZBiAez1JG5_NK5SiznORwipHdtbVWS7U5voFQcR14vRfTpHVkGmF78wvYaBkY3VSyOEojbw9Epym9EV2IY7WzGKRYv8Y4kEeD8IdpqTdLT237lrb7pRdJBNkx5G-YNnB1P4kmIsnY_ba-7arsI3zKN1TICp4P22G1dVT63PZiXlWkYTD3K5ckYlHlCGYoZwQnzR8y_0oNTPxuPC_pzHB_nWZF1ZrLYdARLN1C9UEPH8Umf-ObwtZKJ7DkMwhCHXMg=";
+        if(!token.equals("")){
+            Log.d("API-CALL","APIService");
+            APIService apiService = ApiUtils.getAPIService();
+            AccountsRequest accountsRequest = new AccountsRequest();
+            accountsRequest.setNationalIdentifier("0450090900");
+            apiService.getAccounts(token).enqueue(new Callback<Result>() {
+                @Override
+                public void onResponse(Call<Result> call, Response<Result> response) {
+                    Log.d("API-CALL","200");
+                    Log.d("API-CALL",response.headers().toString());
+                }
+                @Override
+                public void onFailure(Call<Result> call, Throwable t) {
+                    Log.d("API-CALL","FAILED");
+                }
+            });
+        }
+    }
+
 }
