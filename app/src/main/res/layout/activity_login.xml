@@ -49,25 +49,6 @@
 
 
         <Button
-            android:id="@+id/testPost"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/iran_sans_web_fa_num"
-            android:text="Test Post"/>
-
-            <EditText
-            android:id="@+id/responsePost"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/iran_sans_web_fa_num"
-            android:hint="response post"
-            android:layout_gravity="center"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            android:inputType="text"/>
-
-        <Button
             android:id="@+id/login_button"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
