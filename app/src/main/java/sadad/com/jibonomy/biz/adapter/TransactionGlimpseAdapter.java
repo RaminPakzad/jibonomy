@@ -16,9 +16,11 @@ import java.util.List;
 
 import sadad.com.jibonomy.R;
 import sadad.com.jibonomy.entities.Category;
+import sadad.com.jibonomy.entities.SubCategory;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.fragments.TransactionFragment;
 import sadad.com.jibonomy.services.CategoryService;
+import sadad.com.jibonomy.services.SubCategoryService;
 import sadad.com.jibonomy.utils.NavigationUtil;
 import sadad.com.jibonomy.utils.StringUtil;
 
@@ -27,12 +29,14 @@ public class TransactionGlimpseAdapter extends RecyclerView.Adapter<TransactionG
     private List<Transaction> transactionList;
     private Context context;
     private CategoryService categoryService;
+    private SubCategoryService subCategoryService;
     private View itemView;
 
     public TransactionGlimpseAdapter(List<Transaction> transactionList, Context context) {
         this.transactionList = transactionList;
         this.context = context;
         categoryService = new CategoryService(context);
+        subCategoryService = new SubCategoryService(context);
     }
 
     @Override
@@ -47,8 +51,9 @@ public class TransactionGlimpseAdapter extends RecyclerView.Adapter<TransactionG
     public void onBindViewHolder(TransactionGlimpseAdapter.MyViewHolder holder, int position) {
         final Transaction transaction = transactionList.get(position);
 
+        SubCategory subCategory = subCategoryService.getSubCategory(transaction.getSubCategoryType());
+        Category c = categoryService.get(subCategory.getCategoryId());
 
-        Category c = categoryService.get(transaction.getSubCategoryType());
         DecimalFormat df = new DecimalFormat("#,###");
         String amount = df.format(transaction.getAmount()) + " ریال ";
         holder.amountOfTransaction.setText(amount);

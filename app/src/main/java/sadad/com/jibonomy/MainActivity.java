@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity
 //                        .setAction("Action", null).show();
 //            }
 //        });
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
@@ -111,13 +111,12 @@ public class MainActivity extends AppCompatActivity
                         loadFragment(new CategoryListFragment());
                         break;
                 }
-
                 return false;
             }
         });
 
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        final NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         // Update user data in navigation bar
         SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(false);
+               item.setChecked(true);
                 switch (item.getItemId()) {
                     case R.id.main_nav_home:
                         toolbar.setTitle("خانه");
@@ -160,7 +159,7 @@ public class MainActivity extends AppCompatActivity
                         break;
 
                 }
-
+                drawer.closeDrawers();
                 return true;
             }
         });

@@ -15,6 +15,7 @@
     <color name="lightFont">#031cd9</color>
     <color name="lightGray">#29000420</color>
     <color name="tooLightGray">#0a000420</color>
+    <color name="lightBlue">#0f1751</color>
     <color name="black">#000105</color>
     <color name="selectedButtonNavigation">#830a04</color>
 
