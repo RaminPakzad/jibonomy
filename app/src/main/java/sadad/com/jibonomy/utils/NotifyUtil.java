@@ -47,7 +47,7 @@ public class NotifyUtil {
         notificationManager.notify(0, mBuilder.build());
     }
 
-    public static void sendNotification(Context mContext) {
+    public static void sendNotification(Context mContext,String title,String contentText) {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(mContext.getApplicationContext(), "notify_001");
         Intent ii = new Intent(mContext.getApplicationContext(), MainActivity.class);
@@ -57,7 +57,6 @@ public class NotifyUtil {
         //bigText.bigText(verseurl);
         bigText.setBigContentTitle("مراقب هزینه های خودت باش");
         bigText.setSummaryText("جیبونومی");
-
         mBuilder.setContentIntent(pendingIntent);
         mBuilder.setSmallIcon(R.mipmap.app_icon_s);
         mBuilder.setContentTitle("توجه");

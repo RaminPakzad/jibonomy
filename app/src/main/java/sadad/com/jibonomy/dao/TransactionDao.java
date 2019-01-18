@@ -4,6 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import sadad.com.jibonomy.biz.dto.ChartDataDto;
@@ -19,12 +20,14 @@ public interface TransactionDao {
     void deleteAll();
 
 
-
     @Query("SELECT * from Transactions ORDER BY transactionDate DESC")
     List<Transaction> getAll();
 
     @Query("SELECT * from Transactions where  transactionId = :transactionId ")
     Transaction get(Long transactionId);
+
+    @Query("SELECT * from Transactions where  amount = :amount and transactionDate = :date and transactionTime = :time")
+    List<Transaction> getByAmountAndDateTime(BigDecimal amount, String date, String time);
 
     @Query("SELECT * from Transactions where  transactionDate = :transactionDate")
     List<Transaction> getByTransactionDate(String transactionDate);
@@ -37,9 +40,6 @@ public interface TransactionDao {
 
     @Query("select SubCategory.categoryId as lable ,SUM(Transactions.amount) as totalAmount  from Transactions left join SubCategory on Transactions.subCategoryType =  SubCategory.categoryId WHERE substr(Transactions.transactionDate,5,2) == :month  group by SubCategory.categoryId ")
     List<ChartDataDto> sumAmountByCategoryGroupWithMonth(String month);
-
-
-
 
 
 }

@@ -9,7 +9,7 @@
     <dimen name="small_text_size">15sp</dimen>
     <dimen name="tiny_text_size">10sp</dimen>
     <dimen name="margin_side">10dp</dimen>
-    <dimen name="bottomNavigationHeight">70dp</dimen>
+    <dimen name="bottomNavigationHeight">50dp</dimen>
 
     <!--
 Refer to App Widget Documentation for margin information

@@ -1,6 +1,7 @@
 package sadad.com.jibonomy.services;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.github.mikephil.charting.data.PieEntry;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
@@ -35,21 +36,51 @@ public class TransactionService {
         this.context = context;
     }
 
+
+    public List<Transaction> getTransactionsByAmountAndDateTime(BigDecimal amount, String date, String time) {
+        return transactionDao.getByAmountAndDateTime(amount, date, time);
+    }
+
     public void insert(Transaction transaction) {
-        if (transaction.getDescription().equals("SMS")) {
-            NotifyUtil.sendNotification(context);
+        if (/*isSMS && */isExist(transaction)) {
+            Log.i("jibonomy", "duplicated transaction");
+            return;
         }
+        boolean isSMS = transaction.getTag() != null && transaction.getTag().equals("SMS");
+        if (isSMS) {
+            NotifyUtil.sendNotification(context,"پیام بانکی جدید","برای تعیین تراکنش لمس کنید");
+        }
+
+        expenseExceedNotify(transaction);
+        this.transactionDao.insert(transaction);
+    }
+
+    private boolean isExist(Transaction transaction) {
+        try {
+            List<Transaction> transactions = getTransactionsByAmountAndDateTime(transaction.getAmount(), transaction.getTransactionDate(), transaction.getTransactionTime());
+            return transactions.size() > 0;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public void update(Transaction transaction) {
+        expenseExceedNotify(transaction);
+
+        this.transactionDao.delete(transaction.getTransactionId());
+        this.transactionDao.insert(transaction);
+    }
+
+    private void expenseExceedNotify(Transaction transaction) {
         if (transaction.getTransactionType().equals(Transaction.EXPENSE)) {
             PersianCalendar persianCalendar = new PersianCalendar(new Date().getTime());
             String persianDate = persianCalendar.getPersianShortDate().replace("/", "");
             BigDecimal sumOfExpenseTransactions = getSumOfExpenseTransactions(persianDate);
             BigDecimal sum = sumOfExpenseTransactions.add(transaction.getAmount());
             if (sum.compareTo(userService.getUserDailyBudget()) > 0) {
-                NotifyUtil.sendNotification(context);
+                NotifyUtil.sendNotification(context,"عبور از سقف بودجه تعیین شده","شما امروز بیشتر از سقف بودجه خرج کرده اید");
             }
         }
-
-        this.transactionDao.insert(transaction);
     }
 
     public void delete(Long transactionId) {

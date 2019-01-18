@@ -36,6 +36,7 @@ import sadad.com.jibonomy.services.CategoryService;
 import sadad.com.jibonomy.services.SubCategoryService;
 import sadad.com.jibonomy.services.TransactionService;
 import sadad.com.jibonomy.utils.NavigationUtil;
+import sadad.com.jibonomy.utils.StringUtil;
 
 /**
  * @author ramin pakzad (RPakzadmanesh@gmail.com) on 1/16/2019.
@@ -51,10 +52,10 @@ public class TransactionFragment extends Fragment {
     RadioGroup radioTransactionType;
     CategoryService categoryService;
     SubCategoryService subCategoryService;
-    Long selectedSubCategory;
-    Long selectedDate;
+    Long selectedSubCategory, transactionId, selectedDate;
     String selectedTime;
-    private TransactionService transactionService;
+
+    TransactionService transactionService;
 
     @Nullable
     @Override
@@ -66,6 +67,34 @@ public class TransactionFragment extends Fragment {
         amount = rootView.findViewById(R.id.amount);
         dateOfTransaction = rootView.findViewById(R.id.dateOfTransaction);
         timeOfTransaction = rootView.findViewById(R.id.timeOfTransaction);
+        transactionDescription = rootView.findViewById(R.id.transactionDescription);
+        selectCategory = rootView.findViewById(R.id.selectCategory);
+        saveTransaction = rootView.findViewById(R.id.saveTransaction);
+        radioTransactionType = rootView.findViewById(R.id.radioTransactionType);
+
+
+        if (isInEditMode()) {
+            transactionId = getArguments().getLong(Transaction.TRANSACTION_ID_LABEL);
+            Transaction transaction = transactionService.getTransaction(transactionId);
+            amount.setText(StringUtil.df.format(transaction.getAmount()));
+            dateOfTransaction.setText(StringUtil.formatDate(transaction.getTransactionDate()));
+            timeOfTransaction.setText(StringUtil.formatTime(transaction.getTransactionTime()));
+            selectedDate = Long.valueOf(transaction.getTransactionDate());
+            selectedTime = transaction.getTransactionTime();
+            SubCategory subCategory = subCategoryService.getSubCategory(transaction.getSubCategoryType());
+            selectedSubCategory = subCategory.getSubCategoryId();
+
+            if (transaction.getTransactionType().equals(Transaction.EXPENSE)) {
+                radioTransactionType.check(R.id.radioExpense);
+            } else {
+                radioTransactionType.check(R.id.radioIncome);
+            }
+            Category category = categoryService.get(subCategory.getCategoryId());
+            String categoryTitle = category.getCategoryName() + "/" + subCategory.getSubCategoryName();
+            selectCategory.setText(categoryTitle);
+
+            transactionDescription.setText(transaction.getDescription());
+        }
 
         timeOfTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,22 +146,26 @@ public class TransactionFragment extends Fragment {
                 datePickerDialog.show(fragmentManager, "DatePickerDialog");
             }
         });
-        transactionDescription = rootView.findViewById(R.id.transactionDescription);
-        selectCategory = rootView.findViewById(R.id.selectCategory);
-        saveTransaction = rootView.findViewById(R.id.saveTransaction);
-        radioTransactionType = rootView.findViewById(R.id.radioTransactionType);
+
         saveTransaction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Transaction transaction = new Transaction();
-                transaction.setAmount(new BigDecimal(amount.getText().toString()));
+                transaction.setTag("user");
+                transaction.setAmount(new BigDecimal(amount.getText().toString().replace(",", "")));
                 transaction.setSubCategoryType(selectedSubCategory);
                 transaction.setDescription(transactionDescription.getText().toString());
                 transaction.setTransactionDate(Long.toString(selectedDate));
                 transaction.setTransactionTime(selectedTime);
                 RadioButton radio = rootView.findViewById(radioTransactionType.getCheckedRadioButtonId());
                 transaction.setTransactionType(Byte.valueOf(radio.getTag().toString()));
-                transactionService.insert(transaction);
+                if (isInEditMode()) {
+                    long transactionId = getArguments().getLong(Transaction.TRANSACTION_ID_LABEL);
+                    transaction.setTransactionId(transactionId);
+                    transactionService.update(transaction);
+                } else {
+                    transactionService.insert(transaction);
+                }
                 NavigationUtil.changeFragment(new HomeFragment(), rootView);
             }
         });
@@ -247,5 +280,9 @@ public class TransactionFragment extends Fragment {
         });
 
         return rootView;
+    }
+
+    private boolean isInEditMode() {
+        return getArguments() != null && getArguments().get(Transaction.TRANSACTION_ID_LABEL) != null;
     }
 }
