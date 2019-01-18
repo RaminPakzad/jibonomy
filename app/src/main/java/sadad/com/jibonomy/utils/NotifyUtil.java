@@ -57,7 +57,6 @@ public class NotifyUtil {
         //bigText.bigText(verseurl);
         bigText.setBigContentTitle("مراقب هزینه های خودت باش");
         bigText.setSummaryText("جیبونومی");
-
         mBuilder.setContentIntent(pendingIntent);
         mBuilder.setSmallIcon(R.mipmap.app_icon_s);
         mBuilder.setContentTitle("توجه");

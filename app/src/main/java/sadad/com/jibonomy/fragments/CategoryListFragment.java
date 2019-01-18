@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import sadad.com.jibonomy.R;
@@ -18,6 +19,7 @@ import sadad.com.jibonomy.biz.adapter.CategoryListAdapter;
 import sadad.com.jibonomy.entities.Category;
 import sadad.com.jibonomy.services.CategoryService;
 import sadad.com.jibonomy.utils.NavigationUtil;
+import sadad.com.jibonomy.utils.StringUtil;
 
 /**
  * @author ramin pakzad (RPakzadmanesh@gmail.com) on 1/17/2019.
@@ -45,7 +47,12 @@ public class CategoryListFragment extends Fragment {
             }
         });
 
-        List<Category> categories = categoryService.getCategories();
+        List<Category> categoriesFromDb = categoryService.getCategories();
+        List<Category> categories = new ArrayList<>();
+        for (Category item : categoriesFromDb) {
+            if (item.getTag() != null && item.getTag().equals(StringUtil.UNDEFINED_TAG))
+                categories.add(item);
+        }
 
         vlAdapter = new CategoryListAdapter(categories);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(rootView.getContext());

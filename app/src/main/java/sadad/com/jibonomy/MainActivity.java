@@ -1,6 +1,7 @@
 package sadad.com.jibonomy;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -27,8 +28,21 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import sadad.com.jibonomy.dao.CategoryDao;
+import sadad.com.jibonomy.dao.JibonomyRoomDatabase;
+import sadad.com.jibonomy.dao.SubCategoryDao;
+import sadad.com.jibonomy.dao.TransactionDao;
+import sadad.com.jibonomy.entities.Category;
+import sadad.com.jibonomy.entities.SubCategory;
+import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.fragments.CategoryListFragment;
 import sadad.com.jibonomy.fragments.TransactionFragment;
+import sadad.com.jibonomy.utils.StringUtil;
+
+import static sadad.com.jibonomy.utils.StringUtil.UNDEFINED_TAG;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SeekBar.OnSeekBarChangeListener,
@@ -43,13 +57,14 @@ public class MainActivity extends AppCompatActivity
             Log.i("TAG", "MY_PERMISSIONS_REQUEST_SMS_RECEIVE --> YES");
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        insertDate(this);
 
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.RECEIVE_SMS},
@@ -163,6 +178,7 @@ public class MainActivity extends AppCompatActivity
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -224,5 +240,123 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onNothingSelected() {
 
+    }
+
+    private void insertDate(Context context) {
+        JibonomyRoomDatabase db = JibonomyRoomDatabase.getDatabase(context);
+        CategoryDao asyncCategoryDao = db.categoryDao();
+        SubCategoryDao asyncSubCategoryDao = db.subCategoryDao();
+        TransactionDao asyncTransactionDao = db.transactionDao();
+
+        asyncCategoryDao.deleteAll();
+        asyncSubCategoryDao.deleteAll();
+        asyncTransactionDao.deleteAll();
+
+        Category category = new Category();
+        category.setCategoryId(1L);
+        category.setCategoryName("خوراک");
+        category.setBudget(new BigDecimal(22222));
+        category.setIconName("ic_food_grey600_24dp");
+
+        Category category1 = new Category();
+        category1.setCategoryId(2L);
+        category1.setBudget(new BigDecimal(22222));
+
+        category1.setCategoryName("پوشاک");
+        category1.setIconName("ic_tshirt_crew_grey600_24dp");
+
+
+        Category category2 = new Category();
+        category2.setCategoryId(3L);
+        category2.setBudget(new BigDecimal(22222));
+
+        category2.setCategoryName("حمل و نقل");
+        category2.setIconName("ic_train_car_grey600_24dp");
+
+
+        Category category3 = new Category();
+        category3.setCategoryId(4L);
+        category3.setCategoryName("فرهنگی");
+        category3.setBudget(new BigDecimal(22222));
+
+        category3.setIconName("ic_theater_grey600_24dp");
+
+
+        Category category4 = new Category();
+
+        category4.setBudget(new BigDecimal(22222));
+
+        category4.setCategoryName("درمانی");
+        category4.setIconName("ic_hospital_building_grey600_24dp");
+
+////////////////////////undefined
+        Category undefinedCategory = new Category();
+        undefinedCategory.setBudget(new BigDecimal(1000000000));
+        undefinedCategory.setCategoryName("نامشخص");
+        undefinedCategory.setTag(UNDEFINED_TAG);
+        undefinedCategory.setIconName("question");
+////////////////////////undefined
+        asyncCategoryDao.insert(category);
+        asyncCategoryDao.insert(category1);
+        asyncCategoryDao.insert(category2);
+        asyncCategoryDao.insert(category3);
+        asyncCategoryDao.insert(undefinedCategory);
+//////////////////////////
+        SubCategory subCategory1 = new SubCategory();
+        subCategory1.setSubCategoryName("sub2");
+        subCategory1.setIconName("home");
+
+        SubCategory subCategory2 = new SubCategory();
+        subCategory2.setSubCategoryName("sub3");
+        subCategory2.setIconName("home");
+
+        SubCategory subCategory3 = new SubCategory();
+        subCategory3.setSubCategoryName("sub4");
+        subCategory3.setIconName("home");
+
+        SubCategory subCategory4 = new SubCategory();
+        subCategory4.setSubCategoryName("sub5");
+        subCategory4.setIconName("home");
+        //////////////////////undefined
+
+
+        SubCategory subCategoryUndefined = new SubCategory();
+        subCategoryUndefined.setSubCategoryName("نامشخص");
+        subCategoryUndefined.setIconName("question");
+        subCategoryUndefined.setTag(StringUtil.UNDEFINED_TAG);
+        subCategoryUndefined.setCategoryId(asyncCategoryDao.getUnDefinedCategory().getCategoryId());
+        asyncSubCategoryDao.insert(subCategoryUndefined);
+
+        //////////////////////undefined
+        List<Category> cats = asyncCategoryDao.getAll();
+        for (Category item : cats) {
+            if (item.getTag() != null && item.getTag().equals(UNDEFINED_TAG)) {
+                continue;
+            }
+            subCategory1.setCategoryId(item.getCategoryId());
+            subCategory2.setCategoryId(item.getCategoryId());
+            subCategory3.setCategoryId(item.getCategoryId());
+            subCategory4.setCategoryId(item.getCategoryId());
+
+            asyncSubCategoryDao.insert(subCategory1);
+            asyncSubCategoryDao.insert(subCategory2);
+            asyncSubCategoryDao.insert(subCategory3);
+            asyncSubCategoryDao.insert(subCategory4);
+        }
+
+        List<SubCategory> subcat = asyncSubCategoryDao.getAll();
+        for (int i = 0; i < 5; i++) {
+            Transaction transaction = new Transaction();
+            Byte[] type = {(byte) 1, (byte) 2};
+            SubCategory s = subcat.get((int) (Math.random() * subcat.size()));
+            transaction.setAmount(new BigDecimal(Math.floor(Math.random() * 100) * 1000));
+            transaction.setDescription("Some Description");
+            transaction.setSubCategoryType(s.getSubCategoryId());
+            transaction.setTransactionType(type[(int) Math.round(Math.random())]);
+            transaction.setTransactionTime("2000");
+            transaction.setTransactionDate("13970101");
+            Log.d("Transactions", transaction.toString());
+            asyncTransactionDao.insert(transaction);
+        }
     }
 }

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 
 @Entity(tableName = "Transactions")
 public class Transaction {
+    public static final String TRANSACTION_ID_LABEL = "TRANSACTION_ID";
     public static final Byte EXPENSE = (byte) 1;
     public static final Byte INCOME = (byte) 2;
     @PrimaryKey(autoGenerate = true)
