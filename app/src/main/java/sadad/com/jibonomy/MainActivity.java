@@ -101,19 +101,19 @@ public class MainActivity extends AppCompatActivity
                 FragmentTransaction fragmentTransaction;
                 switch (item.getItemId()) {
                     case R.id.add_transaction:
-                        toolbar.setTitle("AddTransaciton");
+                        toolbar.setTitle("تراکنش");
                         loadFragment(new TransactionFragment());
                         break;
                     case R.id.wish_list:
-                        toolbar.setTitle("Wishes");
+                        toolbar.setTitle("آرزوها");
                         loadFragment(new WishListFragment());
                         break;
                     case R.id.home:
-                        toolbar.setTitle("Home");
+                        toolbar.setTitle("خانه");
                         loadFragment(new HomeFragment());
                         break;
                     case R.id.category:
-                        toolbar.setTitle("Category");
+                        toolbar.setTitle("طبقه بندی");
                         loadFragment(new CategoryListFragment());
                         break;
                 }
@@ -137,18 +137,26 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(true);
+                item.setChecked(false);
                 switch (item.getItemId()) {
                     case R.id.main_nav_home:
-                        Log.d("Item Clicked", "main_nav_wish_list");
-                        break;
+                        toolbar.setTitle("خانه");
+                        loadFragment(new HomeFragment());
+
+                    break;
                     case R.id.main_nav_wish_list:
+                        toolbar.setTitle("آرزوها");
+                        loadFragment(new WishListFragment());
                         Log.d("Item Clicked", "main_nav_wish_list");
                         break;
                     case R.id.main_nav_transaction_list:
+                        toolbar.setTitle("لیست تراکنش");
+                        loadFragment(new AllTransactionsFragment());
                         Log.d("Item Clicked", "main_nav_transaction_list");
                         break;
                     case R.id.main_nav_report:
+                        toolbar.setTitle("گزارشات");
+                        loadFragment(new TransactionFragment());
                         Log.d("Item Clicked", "main_nav_report");
                         break;
                     case R.id.main_nav_setting:
@@ -156,9 +164,10 @@ public class MainActivity extends AppCompatActivity
                         Intent i = new Intent(getBaseContext(), SettingFragment.class);
                         startActivity(i);
                         break;
+
                 }
 
-                return false;
+                return true;
             }
         });
 
@@ -260,42 +269,36 @@ public class MainActivity extends AppCompatActivity
         asyncSubCategoryDao.deleteAll();
         asyncTransactionDao.deleteAll();
 
-        Category category = new Category();
-        category.setCategoryId(1L);
-        category.setCategoryName("خوراک");
-        category.setBudget(new BigDecimal(22222));
-        category.setIconName("ic_food_grey600_24dp");
+        Category khorakCategory = new Category();
+        khorakCategory.setCategoryId(1L);
+        khorakCategory.setCategoryName("خوراک");
+        khorakCategory.setBudget(new BigDecimal(22222));
+        khorakCategory.setIconName("ic_food_grey600_24dp");
 
-        Category category1 = new Category();
-        category1.setCategoryId(2L);
-        category1.setBudget(new BigDecimal(22222));
-
-        category1.setCategoryName("پوشاک");
-        category1.setIconName("ic_tshirt_crew_grey600_24dp");
-
-
-        Category category2 = new Category();
-        category2.setCategoryId(3L);
-        category2.setBudget(new BigDecimal(22222));
-
-        category2.setCategoryName("حمل و نقل");
-        category2.setIconName("ic_train_car_grey600_24dp");
+        Category pooShaakCategory = new Category();
+        pooShaakCategory.setCategoryId(2L);
+        pooShaakCategory.setBudget(new BigDecimal(22222));
+        pooShaakCategory.setCategoryName("پوشاک");
+        pooShaakCategory.setIconName("ic_tshirt_crew_grey600_24dp");
 
 
-        Category category3 = new Category();
-        category3.setCategoryId(4L);
-        category3.setCategoryName("فرهنگی");
-        category3.setBudget(new BigDecimal(22222));
+        Category transferCategory = new Category();
+        transferCategory.setCategoryId(3L);
+        transferCategory.setBudget(new BigDecimal(22222));
+        transferCategory.setCategoryName("حمل و نقل");
+        transferCategory.setIconName("ic_train_car_grey600_24dp");
 
-        category3.setIconName("ic_theater_grey600_24dp");
 
+        Category farhangyCategory = new Category();
+        farhangyCategory.setCategoryId(4L);
+        farhangyCategory.setCategoryName("فرهنگی");
+        farhangyCategory.setBudget(new BigDecimal(22222));
+        farhangyCategory.setIconName("ic_theater_grey600_24dp");
 
-        Category category4 = new Category();
-
-        category4.setBudget(new BigDecimal(22222));
-
-        category4.setCategoryName("درمانی");
-        category4.setIconName("ic_hospital_building_grey600_24dp");
+        Category darmaniCategory = new Category();
+        darmaniCategory.setBudget(new BigDecimal(22222));
+        darmaniCategory.setCategoryName("درمانی");
+        darmaniCategory.setIconName("ic_hospital_building_grey600_24dp");
 
 ////////////////////////undefined
         Category undefinedCategory = new Category();
@@ -304,26 +307,27 @@ public class MainActivity extends AppCompatActivity
         undefinedCategory.setTag(UNDEFINED_TAG);
         undefinedCategory.setIconName("question");
 ////////////////////////undefined
-        asyncCategoryDao.insert(category);
-        asyncCategoryDao.insert(category1);
-        asyncCategoryDao.insert(category2);
-        asyncCategoryDao.insert(category3);
+        asyncCategoryDao.insert(khorakCategory);
+        asyncCategoryDao.insert(pooShaakCategory);
+        asyncCategoryDao.insert(transferCategory);
+        asyncCategoryDao.insert(farhangyCategory);
+        asyncCategoryDao.insert(darmaniCategory);
         asyncCategoryDao.insert(undefinedCategory);
 //////////////////////////
         SubCategory subCategory1 = new SubCategory();
-        subCategory1.setSubCategoryName("sub2");
+        subCategory1.setSubCategoryName("زیرگروه یک");
         subCategory1.setIconName("home");
 
         SubCategory subCategory2 = new SubCategory();
-        subCategory2.setSubCategoryName("sub3");
+        subCategory2.setSubCategoryName("زیر گروه دو");
         subCategory2.setIconName("home");
 
         SubCategory subCategory3 = new SubCategory();
-        subCategory3.setSubCategoryName("sub4");
+        subCategory3.setSubCategoryName("زیر گروه سه");
         subCategory3.setIconName("home");
 
         SubCategory subCategory4 = new SubCategory();
-        subCategory4.setSubCategoryName("sub5");
+        subCategory4.setSubCategoryName("زیر گروه چهار");
         subCategory4.setIconName("home");
         //////////////////////undefined
 
@@ -353,7 +357,7 @@ public class MainActivity extends AppCompatActivity
         }
 
         List<SubCategory> subcat = asyncSubCategoryDao.getAll();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
             Transaction transaction = new Transaction();
             Byte[] type = {(byte) 1, (byte) 2};
             SubCategory s = subcat.get((int) (Math.random() * subcat.size()));

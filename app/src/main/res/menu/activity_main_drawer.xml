@@ -10,19 +10,19 @@
             android:title="@string/home" />
         <item
             android:id="@+id/main_nav_wish_list"
-            android:icon="@drawable/wish_list"
+            android:icon="@drawable/genie"
             android:title="@string/wish_list" />
         <item
             android:id="@+id/main_nav_transaction_list"
-            android:icon="@drawable/home"
+            android:icon="@drawable/coin"
             android:title="@string/transaction_list" />
         <item
             android:id="@+id/main_nav_report"
-            android:icon="@drawable/home"
+            android:icon="@drawable/dashboard_fill"
             android:title="@string/report" />
         <item
             android:id="@+id/main_nav_setting"
-            android:icon="@drawable/home"
+            android:icon="@drawable/setting"
             android:title="@string/setting" />
     </group>
 

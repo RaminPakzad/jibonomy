@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.ChartData;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -27,19 +24,12 @@ import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.github.mikephil.charting.utils.MPPointF;
 
-import org.w3c.dom.Text;
-
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import sadad.com.jibonomy.biz.adapter.TransactionGlimpseAdapter;
-import sadad.com.jibonomy.biz.dto.ChartDataDto;
 import sadad.com.jibonomy.entities.Transaction;
 import sadad.com.jibonomy.services.TransactionService;
 
@@ -48,16 +38,14 @@ import sadad.com.jibonomy.services.TransactionService;
  */
 public class HomeFragment extends Fragment {
     View rootView;
-
+    SharedPreferences prefs;
     private PieChart chart;
     private RecyclerView transactionGlimpseList;
     private TransactionGlimpseAdapter transactionGlimpseAdapter;
     private TransactionService transactionService;
-    private TextView monthNameText,appBalanceTextView;
+    private TextView monthNameText, appBalanceTextView;
     private View centerView;
-    SharedPreferences prefs;
-
-    private String[] jaliliMonthList = {"","فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"};
+    private String[] jaliliMonthList = {"", "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"};
     private int currentPosition = 1;
 
     @Nullable
@@ -68,7 +56,7 @@ public class HomeFragment extends Fragment {
         prefs = getContext().getSharedPreferences("user", getContext().MODE_PRIVATE);
         DecimalFormat df = new DecimalFormat("#,###");
         appBalanceTextView = (TextView) rootView.findViewById(R.id.app_balance);
-        appBalanceTextView.setText(df.format(prefs.getLong("appBalance",0)) + " ریال");
+        appBalanceTextView.setText(df.format(prefs.getLong("appBalance", 0)) + " ریال");
 
         transactionGlimpseList = rootView.findViewById(R.id.transactionGlimpseList);
         chart = rootView.findViewById(R.id.overallExpenseChart);
@@ -97,6 +85,10 @@ public class HomeFragment extends Fragment {
         });
 
         transactions = transactionService.getTransactiones();
+        if (transactions.size() >= 8) {
+            transactions = transactions.subList(0, 7);
+        }
+
         transactionGlimpseAdapter = new TransactionGlimpseAdapter(transactions, rootView.getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(rootView.getContext());
         transactionGlimpseList.setLayoutManager(mLayoutManager);
@@ -137,7 +129,7 @@ public class HomeFragment extends Fragment {
     private void setData() {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
-        List<PieEntry> chartData = transactionService.getChartData( currentPosition , true );
+        List<PieEntry> chartData = transactionService.getChartData(currentPosition, true);
         PieDataSet dataSet = new PieDataSet(chartData, "Election Results");
         dataSet.setDrawIcons(false);
         chart.getLegend().setEnabled(false);
@@ -171,8 +163,8 @@ public class HomeFragment extends Fragment {
         chart.invalidate();
     }
 
-    public void nextMonth(){
-        if(currentPosition==12){
+    public void nextMonth() {
+        if (currentPosition == 12) {
             currentPosition = 1;
         } else {
             currentPosition++;
@@ -181,8 +173,8 @@ public class HomeFragment extends Fragment {
         setData();
     }
 
-    public void preMonth(){
-        if(currentPosition==1){
+    public void preMonth() {
+        if (currentPosition == 1) {
             currentPosition = 12;
         } else {
             currentPosition--;
