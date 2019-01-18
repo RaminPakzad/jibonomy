@@ -276,19 +276,19 @@ public class MainActivity extends AppCompatActivity
         Category khorakCategory = new Category();
         khorakCategory.setCategoryId(1L);
         khorakCategory.setCategoryName("خوراک");
-        khorakCategory.setBudget(new BigDecimal(22222));
+        khorakCategory.setBudget(new BigDecimal(5000000));
         khorakCategory.setIconName("ic_food_grey600_24dp");
 
         Category pooShaakCategory = new Category();
         pooShaakCategory.setCategoryId(2L);
-        pooShaakCategory.setBudget(new BigDecimal(22222));
+        pooShaakCategory.setBudget(new BigDecimal(35000000));
         pooShaakCategory.setCategoryName("پوشاک");
         pooShaakCategory.setIconName("ic_tshirt_crew_grey600_24dp");
 
 
         Category transferCategory = new Category();
         transferCategory.setCategoryId(3L);
-        transferCategory.setBudget(new BigDecimal(22222));
+        transferCategory.setBudget(new BigDecimal(50000));
         transferCategory.setCategoryName("حمل و نقل");
         transferCategory.setIconName("ic_train_car_grey600_24dp");
 
@@ -296,11 +296,11 @@ public class MainActivity extends AppCompatActivity
         Category farhangyCategory = new Category();
         farhangyCategory.setCategoryId(4L);
         farhangyCategory.setCategoryName("فرهنگی");
-        farhangyCategory.setBudget(new BigDecimal(22222));
+        farhangyCategory.setBudget(new BigDecimal(300000));
         farhangyCategory.setIconName("ic_theater_grey600_24dp");
 
         Category darmaniCategory = new Category();
-        darmaniCategory.setBudget(new BigDecimal(22222));
+        darmaniCategory.setBudget(new BigDecimal(6000000));
         darmaniCategory.setCategoryName("درمانی");
         darmaniCategory.setIconName("ic_hospital_building_grey600_24dp");
 

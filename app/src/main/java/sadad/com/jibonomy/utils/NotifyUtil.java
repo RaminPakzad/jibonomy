@@ -55,12 +55,12 @@ public class NotifyUtil {
 
         NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
         //bigText.bigText(verseurl);
-        bigText.setBigContentTitle("مراقب هزینه های خودت باش");
-        bigText.setSummaryText("جیبونومی");
+        bigText.setBigContentTitle(title);
+//        bigText.setSummaryText("هزینه");
         mBuilder.setContentIntent(pendingIntent);
         mBuilder.setSmallIcon(R.mipmap.app_icon_s);
         mBuilder.setContentTitle("توجه");
-        mBuilder.setContentText("جیبونومی رو باز کن نگاهی به آرزوهات بکن");
+        mBuilder.setContentText(contentText);
         mBuilder.setPriority(Notification.PRIORITY_MAX);
         mBuilder.setStyle(bigText);
 
