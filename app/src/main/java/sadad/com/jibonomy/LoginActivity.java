@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     int[] sampleImages = {R.drawable.into_slider_04, R.drawable.into_slider_01, R.drawable.into_slider_02, R.drawable.into_slider_03};
     EditText responsePost;
     UserService userService;
-    private String callbacl_uri = "http://192.168.25.135/jibonomy/";
+    private String callbacl_uri = "http://code.ai-man.ir/jibonomy/";
 
     ImageListener imageListener = new ImageListener() {
         @Override
