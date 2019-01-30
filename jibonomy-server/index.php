@@ -1,5 +1,5 @@
 <?php
-$redirect_uri = "http://192.168.25.135/jibonomy/";
+$redirect_uri = "http://code.ai-man.ir/jibonomy/";
 if(isset($_GET['code'])){
 
 	$curl = curl_init();
