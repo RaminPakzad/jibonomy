@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:layout_marginTop="2dp"
+    android:background="@drawable/wish_01"
+    android:layoutDirection="rtl">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/dark_gradiant"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:gravity="start"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_side"
+                android:layout_marginStart="@dimen/margin_side"
+                android:background="@drawable/circle_shape"
+                android:padding="3dp"
+                android:gravity="center_vertical"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/small_text_size"
+                android:textStyle="normal" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:gravity="start"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/medium_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/small_text_size"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
