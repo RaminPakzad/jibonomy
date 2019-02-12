@@ -1,5 +1,6 @@
 package sadad.com.jibonomy;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -111,10 +112,18 @@ public class HomeFragment extends Fragment {
         chart.setHighlightPerTapEnabled(true);
         chart.setDrawEntryLabels(false);
 
+        final Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.chart_detail_dialog);
+        final TextView spendTextView = dialog.findViewById(R.id.spend_amount);
+        final TextView budgetTextView = dialog.findViewById(R.id.configed_budget);
+
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                Toast.makeText(rootView.getContext(), "onValueSelected", Toast.LENGTH_SHORT).show();
+                // show chart details dialog
+                spendTextView.setText(""+e.getY());
+                budgetTextView.setText(""+e.getX());
+                dialog.show();
             }
 
             @Override

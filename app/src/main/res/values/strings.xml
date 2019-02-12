@@ -49,4 +49,7 @@
     <string name="subCategoryCaption">عنوان زیر گروه</string>
     <string name="approve">تایید</string>
 
+    <string name="recommended_stores">فروشگاه های پیشنهادی</string>
+    <string name="dialog_description">میزان هزینه شده در این دسته</string>
+
 </resources>

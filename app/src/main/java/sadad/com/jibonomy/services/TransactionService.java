@@ -119,7 +119,9 @@ public class TransactionService {
             CategoryService categoryService = new CategoryService(context);
             List<Category> cl = categoryService.getCategories();
             for (Category c : cl) {
-                chart.add(new PieEntry((long) Math.floor(Math.random() * 1000) * 1000, c.getCategoryName()));
+                PieEntry pieEntry = new PieEntry((long) Math.floor(Math.random() * 1000) * 1000, c.getCategoryName());
+                pieEntry.setX(500000);
+                chart.add(pieEntry);
             }
         } else {
             String m = (month < 10 ? "0" + month : "" + month);

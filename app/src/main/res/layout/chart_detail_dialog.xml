@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
+
+        <TextView
+            android:id="@+id/spend_amount"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/grey"
+            android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:id="@+id/dialog_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dialog_description"
+            android:textColor="@color/grey"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:layout_marginBottom="30dp"
+            android:layout_alignParentRight="true"/>
+
+        <TextView
+            android:id="@+id/configed_budget"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/lightGray"/>
+
+    </RelativeLayout>
+
+    <ProgressBar
+        android:id="@+id/spend_bar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:progress="30"
+        android:layout_alignParentBottom="true" />
+
+    <Button
+        android:id="@+id/find_recommended_stores"
+        android:layout_width="100px"
+        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:layout_height="wrap_content"
+        android:text="@string/recommended_stores"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        />
+
+</LinearLayout>
