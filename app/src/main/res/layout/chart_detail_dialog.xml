@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+    android:layout_width="wrap_content"
     android:layout_height="fill_parent"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:paddingRight="10dp"
         android:paddingLeft="10dp">
@@ -14,25 +14,42 @@
         <TextView
             android:id="@+id/spend_amount"
             android:layout_width="fill_parent"
+            android:textSize="22sp"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_sans_web_fa_num"
             android:textColor="@color/grey"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
             android:layout_alignParentLeft="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_sans_web_fa_num"
+            android:textColor="@color/grey"
+            android:textSize="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentLeft="true"
+            android:text="@string/rial"/>
 
         <TextView
             android:id="@+id/dialog_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/dialog_description"
+            android:textSize="11sp"
             android:textColor="@color/grey"
             android:fontFamily="@font/iran_sans_web_fa_num"
-            android:layout_marginBottom="30dp"
             android:layout_alignParentRight="true"/>
 
         <TextView
             android:id="@+id/configed_budget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/iran_sans_web_fa_num"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:textSize="11sp"
             android:textColor="@color/lightGray"/>
 
     </RelativeLayout>
@@ -43,16 +60,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:progress="30"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
         android:layout_alignParentBottom="true" />
 
     <Button
         android:id="@+id/find_recommended_stores"
-        android:layout_width="100px"
-        android:fontFamily="@font/iran_sans_web_fa_num"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/iran_sans_web_fa_num"
         android:text="@string/recommended_stores"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="5dp"
+        android:textSize="12sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/white"
         />
 
 </LinearLayout>

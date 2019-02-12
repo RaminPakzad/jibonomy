@@ -4,5 +4,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/primaryBlue</item>
+        <item name="android:fontFamily">@font/iran_sans_web_fa_num</item>
+    </style>
+
+    <style name="ButtonTheme" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:colorButtonNormal">@color/primaryBlue</item>
     </style>
 </resources>

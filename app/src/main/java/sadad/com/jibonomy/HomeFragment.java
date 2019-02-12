@@ -12,7 +12,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +34,10 @@ import java.util.List;
 
 import sadad.com.jibonomy.biz.adapter.TransactionGlimpseAdapter;
 import sadad.com.jibonomy.entities.Transaction;
+import sadad.com.jibonomy.fragments.CategoryFragment;
+import sadad.com.jibonomy.fragments.MerchantListFragment;
 import sadad.com.jibonomy.services.TransactionService;
+import sadad.com.jibonomy.utils.NavigationUtil;
 
 /**
  * @author ramin pakzad (RPakzadmanesh@gmail.com) on 1/13/2019.
@@ -48,6 +53,7 @@ public class HomeFragment extends Fragment {
     private View centerView;
     private String[] jaliliMonthList = {"", "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"};
     private int currentPosition = 1;
+    final DecimalFormat df = new DecimalFormat("#,###");
 
     @Nullable
     @Override
@@ -55,7 +61,7 @@ public class HomeFragment extends Fragment {
         rootView = inflater.inflate(R.layout.home_fragment, container, false);
 
         prefs = getContext().getSharedPreferences("user", getContext().MODE_PRIVATE);
-        DecimalFormat df = new DecimalFormat("#,###");
+
         appBalanceTextView = (TextView) rootView.findViewById(R.id.app_balance);
         appBalanceTextView.setText(df.format(prefs.getLong("appBalance", 0)) + " ریال");
 
@@ -116,13 +122,26 @@ public class HomeFragment extends Fragment {
         dialog.setContentView(R.layout.chart_detail_dialog);
         final TextView spendTextView = dialog.findViewById(R.id.spend_amount);
         final TextView budgetTextView = dialog.findViewById(R.id.configed_budget);
+        final TextView descriptionTextView = dialog.findViewById(R.id.dialog_description);
+        final ProgressBar spendBar = dialog.findViewById(R.id.spend_bar);
+        final Button merchantRecommendButton = dialog.findViewById(R.id.find_recommended_stores);
+        merchantRecommendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavigationUtil.changeFragment(new MerchantListFragment(), rootView);
+                dialog.dismiss();
+            }
+        });
 
         chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 // show chart details dialog
-                spendTextView.setText(""+e.getY());
-                budgetTextView.setText(""+e.getX());
+                int budget =  (e.getY()>=e.getX() ? 100 : (int) Math.round(e.getY()/e.getX()*100) );
+                spendTextView.setText( df.format(((long) e.getY())) );
+                budgetTextView.setText( "بودجه: " + df.format((long) e.getX()) );
+                descriptionTextView.setText(getContext().getString(R.string.dialog_description) + " \"" + ((PieEntry) e).getLabel()+"\"");
+                spendBar.setProgress( budget );
                 dialog.show();
             }
 

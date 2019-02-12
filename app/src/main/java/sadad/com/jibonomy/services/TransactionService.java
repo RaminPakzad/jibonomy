@@ -119,8 +119,9 @@ public class TransactionService {
             CategoryService categoryService = new CategoryService(context);
             List<Category> cl = categoryService.getCategories();
             for (Category c : cl) {
-                PieEntry pieEntry = new PieEntry((long) Math.floor(Math.random() * 1000) * 1000, c.getCategoryName());
-                pieEntry.setX(500000);
+                PieEntry pieEntry = new PieEntry((long) Math.floor(Math.random() * 1000) * 1000 *3 , c.getCategoryName());
+                pieEntry.setX(c.getBudget().floatValue());
+                pieEntry.setLabel(c.getCategoryName());
                 chart.add(pieEntry);
             }
         } else {
