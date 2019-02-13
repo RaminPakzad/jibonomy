@@ -17,9 +17,17 @@
             android:icon="@drawable/coin"
             android:title="@string/transaction_list" />
         <item
+            android:id="@+id/main_nav_category"
+            android:icon="@drawable/category"
+            android:title="@string/category_management" />
+        <item
             android:id="@+id/main_nav_report"
             android:icon="@drawable/dashboard_fill"
             android:title="@string/report" />
+        <item
+            android:id="@+id/main_nav_smart_saving"
+            android:icon="@drawable/brain"
+            android:title="@string/smart_saving" />
         <item
             android:id="@+id/main_nav_setting"
             android:icon="@drawable/setting"

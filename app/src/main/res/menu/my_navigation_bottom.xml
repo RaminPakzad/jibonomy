@@ -21,7 +21,7 @@
         android:icon="@drawable/merchants"
         android:title="@string/merchants" />
     <item
-        android:id="@+id/category"
-        android:icon="@drawable/category"
-        android:title="@string/category" />
+        android:id="@+id/accounts"
+        android:icon="@drawable/wallet"
+        android:title="@string/accounts" />
 </menu>

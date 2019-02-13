@@ -43,6 +43,8 @@ import sadad.com.jibonomy.dao.TransactionDao;
 import sadad.com.jibonomy.entities.Category;
 import sadad.com.jibonomy.entities.SubCategory;
 import sadad.com.jibonomy.entities.Transaction;
+import sadad.com.jibonomy.fragments.AccountsListFragment;
+import sadad.com.jibonomy.fragments.CategoryFragment;
 import sadad.com.jibonomy.fragments.CategoryListFragment;
 import sadad.com.jibonomy.fragments.MerchantListFragment;
 import sadad.com.jibonomy.fragments.TransactionFragment;
@@ -111,9 +113,9 @@ public class MainActivity extends AppCompatActivity
                         toolbar.setTitle("خانه");
                         loadFragment(new HomeFragment());
                         break;
-                    case R.id.category:
-                        toolbar.setTitle("طبقه بندی");
-                        loadFragment(new CategoryListFragment());
+                    case R.id.accounts:
+                        toolbar.setTitle("حساب ها");
+                        loadFragment(new AccountsListFragment());
                         break;
                     /*case R.id.dashboard:
                         toolbar.setTitle("گزارشات");
@@ -153,6 +155,11 @@ public class MainActivity extends AppCompatActivity
                         toolbar.setTitle("آرزوها");
                         loadFragment(new WishListFragment());
                         Log.d("Item Clicked", "main_nav_wish_list");
+                        break;
+                    case R.id.main_nav_category:
+                        toolbar.setTitle(" دسته بندی");
+                        loadFragment(new CategoryListFragment());
+                        Log.d("Item Clicked", "main_nav_category");
                         break;
                     case R.id.main_nav_transaction_list:
                         toolbar.setTitle("لیست تراکنش ها");

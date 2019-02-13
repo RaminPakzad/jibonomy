@@ -17,6 +17,7 @@
     <string name="dashboard">گزارشات</string>
     <string name="merchants">فروشگاه ها</string>
     <string name="category">طبقه بندی</string>
+    <string name="category_management"> دسته بندی</string>
     <string name="report">گزارشات</string>
     <string name="home">خانه</string>
     <string name="setting">تنظیمات</string>
@@ -52,5 +53,7 @@
 
     <string name="recommended_stores">فروشگاه های پیشنهادی</string>
     <string name="dialog_description">هزینه های</string>
+    <string name="smart_saving">پس انداز هوشمند</string>
+    <string name="accounts">حساب ها</string>
 
 </resources>
