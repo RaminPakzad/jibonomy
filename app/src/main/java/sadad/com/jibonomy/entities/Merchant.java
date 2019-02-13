@@ -10,6 +10,8 @@ public class Merchant {
     private String description;
     private String picName;
     private BigDecimal budget;
+    private String lat;
+    private String lng;
 
     public Byte getPercent() {
         return percent;
@@ -62,5 +64,19 @@ public class Merchant {
     public Merchant() {
     }
 
+    public String getLat() {
+        return lat;
+    }
 
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
 }

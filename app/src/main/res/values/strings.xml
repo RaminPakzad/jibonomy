@@ -55,5 +55,6 @@
     <string name="dialog_description">هزینه های</string>
     <string name="smart_saving">پس انداز هوشمند</string>
     <string name="accounts">حساب ها</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>
