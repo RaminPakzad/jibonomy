@@ -26,4 +26,6 @@
     <color name="saveButton">#1bb67d</color>
     <color name="iconBackground">#e9eaf5</color>
     <color name="approve">#6ae6b8</color>
+    <color name="textGrey">#2e2e2e</color>
+    <color name="textLightGrey">#393939</color>
 </resources>

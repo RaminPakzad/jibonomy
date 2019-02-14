@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 
 public class Merchant {
+    public static final String MERCHANT_NAME_LABEL = "MERCHANT_NAME_LABEL";
     private Long merchantId;
     private String title;
     private Byte percent;

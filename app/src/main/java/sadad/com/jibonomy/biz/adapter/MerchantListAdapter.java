@@ -1,19 +1,21 @@
 package sadad.com.jibonomy.biz.adapter;
 
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import sadad.com.jibonomy.R;
 import sadad.com.jibonomy.entities.Merchant;
+import sadad.com.jibonomy.fragments.MerchantDetailFragment;
 import sadad.com.jibonomy.services.MerchantService;
+import sadad.com.jibonomy.utils.NavigationUtil;
 
 public class MerchantListAdapter extends RecyclerView.Adapter<MerchantListAdapter.MyViewHolder> {
     private List<Merchant> merchants;
@@ -33,7 +35,11 @@ public class MerchantListAdapter extends RecyclerView.Adapter<MerchantListAdapte
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(itemView.getContext(), "onclick merchant", Toast.LENGTH_SHORT).show();
+                MerchantDetailFragment fragment = new MerchantDetailFragment();
+                Bundle args = new Bundle();
+                args.putString(Merchant.MERCHANT_NAME_LABEL, "merchantName");
+                fragment.setArguments(args);
+                NavigationUtil.changeFragment(fragment, itemView);
             }
         });
         return new MerchantListAdapter.MyViewHolder(itemView);

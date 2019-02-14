@@ -56,5 +56,6 @@
     <string name="smart_saving">پس انداز هوشمند</string>
     <string name="accounts">حساب ها</string>
     <string name="title_activity_maps">Map</string>
+    <string name="contact_info">اطلاعات تماس</string>
 
 </resources>

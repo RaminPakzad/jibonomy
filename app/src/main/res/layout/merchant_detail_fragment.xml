@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ImageView
+            android:id="@+id/merchant_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/merchants"
+            android:src="@drawable/store1" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:clickable="true"
+            android:src="@drawable/location"
+            android:background="@color/colorPrimary"
+            app:rippleColor="@color/colorPrimary"
+            app:layout_anchor="@id/merchant_image"
+            app:layout_anchorGravity="bottom|left|end"
+            android:focusable="true" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+
+    <TextView
+        android:id="@+id/merchant_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:text="فروشگاه عصر نو"
+        android:textColor="@color/textGrey"
+        android:textSize="@dimen/medium_text_size" />
+
+    <TextView
+        android:id="@+id/merchant_category_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:text="پوشاک ورزشی"
+        android:textColor="@color/textLightGrey"
+        android:textSize="@dimen/small_text_size" />
+
+    <TextView
+        android:id="@+id/merchant_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:text="فروشگاه عصر نو با بیش از هزار سال سابقه خدمت رسانی در صنعت پوشاک مفتخر است"
+        android:textColor="@color/textLightGrey"
+        android:textSize="@dimen/small_text_size" />
+
+    <TextView
+        android:id="@+id/merchant_discount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/warnYellow"
+        android:gravity="center_vertical"
+        android:padding="4dp"
+        android:text="تخفیف ویژه مشتریان جیبونومی 20 %"
+        android:textColor="@color/white" />
+
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:text="@string/contact_info"
+        android:textColor="@color/textLightGrey"
+        android:textSize="@dimen/small_text_size" />
+
+
+    <TextView
+        android:id="@+id/merchant_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:text="آدرس : بلوار فرحزادی مرکز خرید آرن"
+        android:textColor="@color/textLightGrey"
+        android:textSize="@dimen/small_text_size" />
+
+
+    <TextView
+        android:id="@+id/merchant_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:text="تلفن : 84542155"
+        android:textColor="@color/textLightGrey"
+        android:textSize="@dimen/small_text_size" />
+
+
+</LinearLayout>
