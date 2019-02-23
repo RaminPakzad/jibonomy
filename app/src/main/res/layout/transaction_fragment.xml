@@ -45,7 +45,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/iran_sans_web_fa_num"
                 android:hint="@string/amount"
-                android:inputType="number"
+                android:inputType="numberDecimal"
+                android:digits="0123456789,"
                 android:textColor="@color/darkFont"
                 android:textColorHint="@color/lightFont" />
 

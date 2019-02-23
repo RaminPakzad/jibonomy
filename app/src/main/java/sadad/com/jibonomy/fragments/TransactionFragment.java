@@ -3,8 +3,11 @@ package sadad.com.jibonomy.fragments;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +25,12 @@ import com.mohamadamin.persianmaterialdatetimepicker.time.TimePickerDialog;
 import com.mohamadamin.persianmaterialdatetimepicker.utils.PersianCalendar;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import sadad.com.jibonomy.ExpandableListAdapter;
 import sadad.com.jibonomy.HomeFragment;
@@ -37,6 +43,8 @@ import sadad.com.jibonomy.services.SubCategoryService;
 import sadad.com.jibonomy.services.TransactionService;
 import sadad.com.jibonomy.utils.NavigationUtil;
 import sadad.com.jibonomy.utils.StringUtil;
+
+import static sadad.com.jibonomy.utils.NavigationUtil.getCommaSeparatedEditText;
 
 /**
  * @author ramin pakzad (RPakzadmanesh@gmail.com) on 1/16/2019.
@@ -71,6 +79,7 @@ public class TransactionFragment extends Fragment {
         selectCategory = rootView.findViewById(R.id.selectCategory);
         saveTransaction = rootView.findViewById(R.id.saveTransaction);
         radioTransactionType = rootView.findViewById(R.id.radioTransactionType);
+        amount.addTextChangedListener(getCommaSeparatedEditText());
 
 
         if (isInEditMode()) {
@@ -281,6 +290,8 @@ public class TransactionFragment extends Fragment {
 
         return rootView;
     }
+
+
 
     private boolean isInEditMode() {
         return getArguments() != null && getArguments().get(Transaction.TRANSACTION_ID_LABEL) != null;
