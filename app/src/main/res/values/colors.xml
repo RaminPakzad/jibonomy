@@ -16,6 +16,7 @@
     <color name="lightGray">#29000420</color>
     <color name="tooLightGray">#0a000420</color>
     <color name="lightBlue">#8491ef</color>
+    <color name="gotoMapColor">#62beea</color>
     <color name="black">#000105</color>
     <color name="selectedButtonNavigation">#830a04</color>
 

@@ -1,17 +1,22 @@
 package sadad.com.jibonomy.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.List;
 
+import sadad.com.jibonomy.MapsActivity;
 import sadad.com.jibonomy.R;
 import sadad.com.jibonomy.biz.adapter.MerchantListAdapter;
 import sadad.com.jibonomy.entities.Merchant;
@@ -42,6 +47,19 @@ public class MerchantListFragment extends Fragment {
         vlAdapter.notifyDataSetChanged();
 
 
+        Button floatingActionButton = rootView.findViewById(R.id.location);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(rootView.getContext(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         return rootView;
     }
+
+
 }
