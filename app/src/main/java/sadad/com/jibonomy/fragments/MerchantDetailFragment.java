@@ -23,7 +23,7 @@ public class MerchantDetailFragment extends android.support.v4.app.Fragment {
         //TextView name = (TextView) rootView.findViewById(R.id.merchant_name);
 
         //name.setText(getArguments().getString(Merchant.MERCHANT_NAME_LABEL));
-        Button floatingActionButton = rootView.findViewById(R.id.location);
+        FloatingActionButton floatingActionButton = rootView.findViewById(R.id.location);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
